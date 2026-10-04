@@ -492,6 +492,10 @@
     90% { transform:translate(-50px, 50px); }
     100%{ transform:translate(0, 0); }
   }
+  /* laptop / tablet: a longer page below the contact text, so "let's chat" brings it more into focus */
+  @media (min-width:761px){
+    .footer{ padding-bottom:250px; }
+  }
   /* phone only: bigger "Say hi back :)" and a smaller gap below it (about a quarter of before) */
   @media (max-width:760px){
     .footer{ padding-top:165px; padding-bottom:180px; }   /* more space above the line (was 48px) and below the contact text (was 120px) */
