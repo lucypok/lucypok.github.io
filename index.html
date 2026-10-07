@@ -437,6 +437,13 @@
     .work-grid{ padding-bottom:0; }
     .work-card{ margin-bottom:74px; }   /* a bit more vertical space between the individual projects (was 56px); size and side spacing unchanged */
   }
+  /* Laptop / desktop: intro text one size bigger (phone untouched) */
+  @media (min-width:1025px){
+    .intro-title{ font-size:clamp(30px, 3.8vw, 56px); }
+    .intro-note{ font-size:16px; }
+    .intro-desc{ font-size:clamp(16px, 1.2vw, 18.5px); max-width:700px; }
+    .intro-cta{ font-size:clamp(15px, 1.15vw, 17px); }
+  }
   @media (min-width:1441px){
     .intro{ padding-left:66px; }   /* was 56px */
   }
