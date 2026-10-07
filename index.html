@@ -440,7 +440,9 @@
   /* Laptop / desktop: intro text one size bigger (phone untouched) */
   @media (min-width:1025px){
     .intro-title{ font-size:clamp(30px, 3.8vw, 56px); }
-    .intro-note{ font-size:16px; }
+    .intro-note{ font-size:16px; margin-top:1px; }   /* laptop: note sits a touch lower (was -2px) */
+    .intro-note .note-star{ font-weight:520; }   /* laptop: slightly heavier asterisk */
+    .intro-note .surname-link{ font-weight:520; }   /* laptop: slightly heavier underlined surname */
     .intro-desc{ font-size:clamp(16px, 1.2vw, 18.5px); max-width:700px; }
     .intro-cta{ font-size:clamp(15px, 1.15vw, 17px); }
   }
@@ -532,7 +534,7 @@
   <main class="work-section" id="work">
     <header class="intro" id="top">
       <h1 class="intro-title">Hi :) I'm Lucy Pok* <span class="lucy-stack" id="lucyStack"><img src="1 copy.jpg" alt="Lucy"><img src="2 copy.jpg" alt="Lucy"><img src="3 copy.jpg" alt="Lucy"><img src="4 copy.jpg" alt="Lucy"><img src="5 copy.jpg" alt="Lucy"><img src="6 copy.jpg" alt="Lucy"><img src="7 copy.jpg" alt="Lucy"><img src="8 copy.jpg" alt="Lucy"><img src="9 copy.jpg" alt="Lucy"><img src="10 copy.jpg" alt="Lucy"><img src="11 copy.jpg" alt="Lucy"></span></h1>
-      <p class="intro-note">*You probably wouldn't remember my <button type="button" class="surname-link" id="surnameLink" aria-expanded="false" aria-controls="aboutBubble">full surname</button></p>
+      <p class="intro-note"><span class="note-star">*</span>You probably wouldn't remember my <button type="button" class="surname-link" id="surnameLink" aria-expanded="false" aria-controls="aboutBubble">full surname</button></p>
       <div class="about-bubble" id="aboutBubble" role="dialog" aria-label="More about Lucy">
         <button type="button" class="ab-close" id="aboutClose" aria-label="Close"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" aria-hidden="true"><path d="M1 1L9 9M9 1L1 9"/></svg></button>
         <p class="ab-intro">So you decided to know a bit more about me. Very well.</p>
