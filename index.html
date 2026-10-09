@@ -406,10 +406,11 @@
   .work-card--natural .work-card-image img,
   .work-card--natural .work-card-image video{ height:auto; object-fit:initial; }
   .work-card--crop .work-card-image{ aspect-ratio:3 / 2; }   /* was 5 / 2: taller so the image is less squished */
-  .work-card--crop .work-card-image img{ object-fit:cover; object-position:center 30%; }
+  .work-card--crop .work-card-image img,
+  .work-card--crop .work-card-image video{ object-fit:cover; object-position:center 30%; }
   /* Roffa card: phone keeps the original crop; laptop shows almost the whole image, cut just below the pink sticker */
   @media (min-width:761px){
-    .work-card--stickers .work-card-image{ max-height:none; aspect-ratio:1191 / 1140; }
+    .work-card--stickers .work-card-image{ max-height:none; aspect-ratio:1108 / 1290; }   /* new jpg: whole stickers, cut just below the pink one */
     .work-card--stickers .work-card-image img{ object-position:center top; }
   }
   .work-card-content{ padding:16px; }
@@ -465,7 +466,8 @@
     /* full width cards, normal scrolling */
     .work-card{ position:relative; z-index:2; display:block; margin-bottom:34px; }
     .work-card--crop .work-card-image{ aspect-ratio:auto; }
-    .work-card--crop .work-card-image img{ height:auto; object-fit:initial; }
+    .work-card--crop .work-card-image img,
+    .work-card--crop .work-card-image video{ height:auto; object-fit:initial; }
     /* no bounce or extra scrolling below the footer */
     html, body{ overscroll-behavior-y:none; }
   }
@@ -575,7 +577,7 @@
       <a href="hickey.html" style="display:contents;">
         <div class="work-card">
           <div class="work-card-image">
-            <img loading="lazy" decoding="async" src="hickeyzine copy.jpg" alt="Hickey zine">
+            <img loading="eager" fetchpriority="high" decoding="async" src="hickeyzine copy.jpg" alt="Hickey zine">
           </div>
           <div class="work-card-content">
             <h3 class="work-card-title">Hickey</h3>
@@ -627,7 +629,7 @@
       <a href="roffa-mon-amour.html" style="display:contents;">
         <div class="work-card work-card--stickers">
           <div class="work-card-image">
-            <img loading="lazy" decoding="async" src="actualstickers.png" alt="Roffa Mon Amour Festival">
+            <img loading="lazy" decoding="async" src="actualstickers.jpg" alt="Roffa Mon Amour Festival">
           </div>
           <div class="work-card-content">
             <h3 class="work-card-title">Roffa Mon Amour Festival</h3>
@@ -666,7 +668,7 @@
       <a href="personal-projects.html" style="display:contents;">
         <div class="work-card work-card--natural work-card--crop">
           <div class="work-card-image">
-            <img src="personalprojects copy.gif" alt="For Funsies" loading="lazy">
+            <video data-src="personalprojects.mp4" muted loop playsinline preload="none" aria-label="For Funsies"></video>
           </div>
           <div class="work-card-content">
             <h3 class="work-card-title">What if...</h3>
