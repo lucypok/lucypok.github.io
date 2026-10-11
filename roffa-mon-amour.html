@@ -316,6 +316,16 @@
     z-index:5;
   }
   .more-work:hover{ opacity:0.65; }
+  .more-work-moon{
+    display:inline-block;
+    font-size:17px;
+    line-height:1;
+    margin-left:6px;
+    vertical-align:middle;
+    text-transform:none;
+    letter-spacing:0;
+    font-family:'Apple Symbols','Segoe UI Symbol','Noto Sans Symbols 2','DejaVu Sans',sans-serif;
+  }
   @media (min-width:761px){ .more-work{ margin-top:150px; } }
 
   /* ---------- Mobile ---------- */
@@ -459,7 +469,7 @@
 
   </div>
 
-  <a class="more-work" href="index.html">more work</a>
+  <a class="more-work" href="index.html">more work<span class="more-work-moon" aria-hidden="true">&#x23FE;</span></a>
 
   <script>
     // Drag the collage pieces around (laptop + mouse only). Nothing is saved: a refresh resets the layout.
