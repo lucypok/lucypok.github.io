@@ -74,8 +74,19 @@
 
   /* ---------- Hero: dark full-bleed background photo behind nav + header + intro ---------- */
   .hero-bg{
+    --bg-crop:160px;            /* how much of the top of the background photo is cropped away */
     position:relative;
-    background:#0e0d0a url('depop-bg-platform copy.jpg') center 30% / cover no-repeat;
+    isolation:isolate;
+    overflow:hidden;
+    background:#0e0d0a;
+  }
+  .hero-bg::after{
+    content:'';
+    position:absolute;
+    left:0; right:0; bottom:0;
+    top:calc(-1 * var(--bg-crop));
+    z-index:-1;
+    background:url('depop-bg-platform copy.jpg') var(--bg-pos, center 30%) / cover no-repeat;
     will-change:background-position;
   }
   .hero-bg::before{
@@ -97,7 +108,7 @@
   .hero-bg .more-work span{ color:var(--white); }
   .hero-bg .project-tag,
   .hero-bg .depop-link{ color:#ff542a; }
-  .footer-bg{ padding:78px 0 24px; background-position:center 75%; }
+  .footer-bg{ padding:78px 0 24px; --bg-crop:0px; --bg-pos:center 75%; }
 
   /* ---------- Nav (identical to STAIN page) ---------- */
   .nav{
@@ -159,7 +170,7 @@
 
   /* ---------- Intro: side-by-side images + copy ---------- */
   .intro{
-    max-width:940px;
+    max-width:620px;
     margin:16px auto 0;
     padding:0 28px 80px;
     display:flex;
@@ -184,9 +195,9 @@
   .intro-visual .v-main{ display:block; }
   .intro-visual .v-side{
     position:absolute;
-    width:17%;
-    right:-3%;
-    bottom:-12%;
+    width:24%;
+    right:-6%;
+    bottom:-14%;
     z-index:2;
   }
   .intro-credit{
@@ -566,7 +577,7 @@
       function animate(){
         current += (target - current) * 0.06; // easing so it "catches up" as scrolling slows
         heroBgs.forEach(function(el){
-          el.style.backgroundPosition = 'center calc(' + el.dataset.baseY + '% + ' + current.toFixed(2) + 'px)';
+          el.style.setProperty('--bg-pos', 'center calc(' + el.dataset.baseY + '% + ' + current.toFixed(2) + 'px)');
         });
         if(Math.abs(target - current) > 0.05){
           requestAnimationFrame(animate);
