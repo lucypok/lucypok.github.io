@@ -170,7 +170,7 @@
 
   /* ---------- Intro: side-by-side images + copy ---------- */
   .intro{
-    max-width:760px;
+    max-width:776px;
     margin:16px auto 0;
     padding:0 28px 80px;
     display:flex;
@@ -195,10 +195,13 @@
   .intro-visual .v-main{ display:block; }
   .intro-visual .v-side{
     position:absolute;
-    width:19%;
-    right:-4%;
-    bottom:-10%;
+    width:18%;
+    right:-12%;
+    bottom:-7%;
     z-index:2;
+  }
+  @media (max-width:900px){
+    .intro-visual .v-side{ right:-4%; }   /* keep the gif on screen on narrow windows */
   }
   .intro-credit{
     font-size:13px;
@@ -209,7 +212,7 @@
   }
   .intro-copy{
     flex:0 0 auto;
-    max-width:560px;
+    max-width:640px;
     margin-top:50px;
     font-weight:400;
     font-size:clamp(15px, 1.3vw, 15px);
@@ -241,7 +244,7 @@
   .intro-copy .bts-link{
     display:inline-block;
     margin-top:6px;
-    font-size:13px;
+    font-size:15px;
     transform:scaleX(1.10);
     transform-origin:left;
     text-decoration:underline;
@@ -253,7 +256,7 @@
     .project-title{ margin-bottom:40px; }   /* a bit more space under the title (laptop) */
     .carousel-banner{ padding-bottom:60px; }   /* a bit more space after the posters (laptop) */
     .footer-bg{ padding-top:104px; }   /* a bit more space between the posters and "This project was made with Liesbeth" (laptop) */
-    .intro{ margin-left:12vw; margin-right:0; margin-top:-14px; }   /* hero + text sit a bit left of centre (laptop) */
+    .intro{ margin-left:max(0px, calc(45.5vw - 388px)); margin-right:0; margin-top:6px; }   /* hero + text sit left of centre (laptop); 45.5vw = centre minus 4.5% */
     .intro{ padding-bottom:120px; }   /* pushes the white poster banner a bit lower (laptop) */
   }
 
@@ -283,9 +286,11 @@
     overflow:hidden;
   }
   .carousel-track{
+    --poster-gap:28px;          /* distance between the posters */
     display:flex;
     width:max-content;
-    gap:20px;
+    gap:var(--poster-gap);
+    padding-right:var(--poster-gap);   /* keeps the loop seamless */
     animation:slide-left 34s linear infinite;
   }
   .carousel-banner:hover .carousel-track{ animation-play-state:paused; }
@@ -313,7 +318,7 @@
     }
     .carousel-track{
       animation:none !important;
-      gap:14px;
+      --poster-gap:18px;
     }
   }
 
