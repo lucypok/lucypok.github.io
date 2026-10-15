@@ -201,21 +201,23 @@
     max-width:none;
     margin-left:0;
   }
-  .intro-visual img{
+  .intro-visual video{
     display:block;
     width:100%;
     height:auto;
+    background:#0e0d0a;
+    pointer-events:none;          /* no tap/click UI on the video */
   }
-  .intro-visual .v-main{ display:block; }
-  .intro-visual .v-side{
-    position:absolute;
-    width:18%;
-    right:-9%;
-    bottom:-11%;
-    z-index:2;
-  }
-  @media (max-width:900px){
-    .intro-visual .v-side{ right:-4%; }   /* keep the gif on screen on narrow windows */
+  /* never show a play button or playbar (Safari/iOS can add a start button if autoplay is held back) */
+  .intro-visual video::-webkit-media-controls,
+  .intro-visual video::-webkit-media-controls-panel,
+  .intro-visual video::-webkit-media-controls-play-button,
+  .intro-visual video::-webkit-media-controls-start-playback-button,
+  .intro-visual video::-webkit-media-controls-overlay-play-button,
+  .intro-visual video::-webkit-media-controls-enclosure{
+    display:none !important;
+    opacity:0 !important;
+    -webkit-appearance:none;
   }
   .intro-credit{
     font-size:13px;
@@ -250,9 +252,13 @@
     font-weight:700;
     color:var(--white);   /* white, kept at the heavier weight */
   }
-  .intro-copy .bts-link{
+  .intro-copy .bts-wrap{
+    position:relative;
     display:inline-block;
     margin-top:18px;
+  }
+  .intro-copy .bts-link{
+    display:inline-block;
     font-size:14px;
     transform:scaleX(1.10);
     transform-origin:left;
@@ -267,10 +273,49 @@
     .intro{ margin-left:auto; margin-right:auto; margin-top:-4px; }   /* hero + text are centred on the page (laptop) */
     /* hero a bit bigger, centred (width 112% = 6% overhang each side) */
     .intro-visual{ width:112%; margin-left:-6%; margin-top:-8px; margin-bottom:0; }
-    .intro-visual .v-side{ width:16%; right:-5%; bottom:-10.3%; }
-    /* description starts at the hero's left edge and ends at its right edge (the text is stretched 1.03 x 1.10 by the scaleX rules, so 112% / 1.133 = 98.8%); lower so the gif does not overlap it */
-    .intro-copy{ margin-left:-6%; max-width:98.8%; margin-top:92px; }
+    /* description lines up with the hero video: same left and right edge (the text is stretched 1.03 x 1.10 by the scaleX rules, so 112% / 1.133 = 98.8%) */
+    .intro-copy{ margin-left:-6%; max-width:98.8%; margin-top:48px; }
     .intro{ padding-bottom:120px; }   /* pushes the white poster banner a bit lower (laptop) */
+  }
+
+  /* ---------- Hover preview of the shoot video (computer only) ---------- */
+  .bts-preview{ display:none; }
+  @media (hover:hover) and (pointer:fine){
+    .bts-preview{
+      display:block;
+      position:absolute;
+      left:0;
+      bottom:calc(100% + 14px);
+      width:340px;
+      aspect-ratio:16 / 9;
+      border-radius:10px;
+      overflow:hidden;
+      background:#000 url('https://i.ytimg.com/vi/GMriUzdwgc4/hqdefault.jpg') center / cover no-repeat;
+      box-shadow:0 14px 40px rgba(0,0,0,0.55);
+      opacity:0;
+      transform:translateY(8px) scale(0.97);
+      transform-origin:left bottom;
+      transition:opacity 0.22s ease, transform 0.22s ease;
+      pointer-events:none;
+      z-index:5;
+    }
+    .bts-wrap:hover .bts-preview,
+    .bts-wrap:focus-within .bts-preview{
+      opacity:1;
+      transform:none;
+    }
+    .bts-preview iframe{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      border:0;
+      transform:scale(1.22);          /* crops away YouTube's title bar and edges */
+      opacity:0;
+      transition:opacity 0.4s ease;
+      pointer-events:none;
+    }
+    .bts-preview iframe.ready{ opacity:1; }
   }
 
   /* ---------- Depop link ---------- */
@@ -402,17 +447,14 @@
       max-width:100%;
       margin-left:0;
       margin-right:0;
-      padding-right:35px;
-    }
-    .intro-visual .v-side{
-      width:20%;
-      right:0;
-      bottom:-16%;
     }
     .intro-credit{ margin-top:34px; }
-    .intro-copy{ max-width:100%; margin-top:56px; padding-right:30px; }
-    .intro-copy p{ margin:0 0 12px; }
-    .intro-copy .bts-link{ margin-top:14px; }
+    .intro-copy{ max-width:90%; margin-top:36px; }   /* a bit wider: longest lines reach the video's right edge */
+    .intro-copy p{ margin:0 0 12px; font-size:15px; }   /* phone body text size, same as the STAIN page */
+    /* phone only: tagline centred again, slightly smaller */
+    .lb{ display:none; }   /* phone: "Or at least what it aspires to be." flows on instead of starting a new line */
+    .project-sub{ display:block; max-width:92%; margin:12px auto 18px; font-size:16.5px; text-wrap:balance; }   /* stays inside the video width, lines break evenly */
+    .intro-copy .bts-wrap{ margin-top:14px; }
 
     .bottom-credit{ padding:0 32px; }
     .more-work{ margin:20px auto 25px; }
@@ -423,12 +465,7 @@
     .project-header{ padding:26px 26px 6px; }
     .intro{ padding:0 26px 48px; }
     .bottom-credit{ padding:0 26px; }
-    .intro-visual{ margin-top:8px; padding-right:24px; }
-    .intro-visual .v-side{
-      width:29%;
-      right:0;
-      bottom:-11%;
-    }
+    .intro-visual{ margin-top:8px; }
   }
 
   /* phone: the role line ("research + design + ...") is the same size on every project page */
@@ -482,21 +519,23 @@
       <br>
       <h1 class="project-title">DEPOP — spec campaign</h1>
       <br>
-      <p class="project-sub">The metro is fast, urban, and sustainable, just like <a class="depop-link" href="https://www.depop.com/" target="_blank" rel="noopener">Depop</a>.<br>Or at least what it aspires to be.</p>
+      <p class="project-sub">The metro is fast, urban, and sustainable, just like <a class="depop-link" href="https://www.depop.com/" target="_blank" rel="noopener">Depop</a>.<br class="lb"> Or at least what it aspires to be.</p>
     </header>
 
     <div class="intro">
       <div>
         <div class="intro-visual">
-          <img class="v-main" src="metro-hero.png" alt="A commuter in a red and blue fleece jacket in a metro carriage, framed by a white Depop sticker on the window that reads: catch it on Depop">
-          <img class="v-side" src="depop-hero-doors copy.gif" alt="Passengers checking their phones as the metro doors open">
+          <video class="v-main" src="metro.mp4" autoplay muted loop playsinline preload="auto" disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback" tabindex="-1" aria-label="A commuter in a red and blue fleece jacket in a metro carriage, framed by a white Depop sticker on the window that reads: catch it on Depop"></video>
         </div>
       </div>
       <div class="intro-copy">
         <p><a class="depop-link-white" href="https://news.depop.com/who-we-are/about/" target="_blank" rel="noopener">Depop</a> is a peer-to-peer marketplace to buy, sell and discover secondhand fashion. What they're missing is a direct line to the young, urban community that already fits that identity.</p>
         <p>We found that in the Netherlands, 80% of young people rely on public transport.<br><span class="emphasis-line">While waiting, most people are glued to their phones. The only moment they do look up is when the metro arrives.</span></p>
         <p>And that's the moment we'd grab their attention and link it directly to Depop.<br>By putting stickers on the metro windows, we'd frame every outfit as a potential Depop buy or sell. Next to that we'd add a reverse image search feature in the Depop app. The easier it is to find, the easier it is to buy.</p>
-        <a class="bts-link" href="https://www.youtube.com/watch?v=GMriUzdwgc4" target="_blank" rel="noopener"> Watch video from the shoot :)</a>
+        <div class="bts-wrap">
+          <a class="bts-link" href="https://www.youtube.com/watch?v=GMriUzdwgc4" target="_blank" rel="noopener"> Watch video from the shoot :)</a>
+          <div class="bts-preview" aria-hidden="true"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -632,6 +671,49 @@
         requestAnimationFrame(step);
       }
       requestAnimationFrame(step);
+    })();
+
+    // keep the hero video playing without any controls (retry if the browser held autoplay back)
+    (function(){
+      var v = document.querySelector('.v-main');
+      if(!v || v.tagName !== 'VIDEO') return;
+      v.controls = false;
+      v.muted = true;
+      function go(){ var p = v.play(); if(p && p.catch){ p.catch(function(){}); } }
+      go();
+      v.addEventListener('loadeddata', go);
+      ['touchstart','pointerdown','scroll','click'].forEach(function(ev){
+        window.addEventListener(ev, function once(){ if(v.paused) go(); window.removeEventListener(ev, once); }, { passive:true });
+      });
+    })();
+
+    // hover preview of the shoot video: starts when you hover "Watch video from the shoot", stops when you leave (computer only)
+    (function(){
+      var wrap = document.querySelector('.bts-wrap');
+      var box = document.querySelector('.bts-preview');
+      if(!wrap || !box) return;
+      if(!window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+      var ID = 'GMriUzdwgc4';
+      var frame = null, killTimer = null;
+      function start(){
+        clearTimeout(killTimer);
+        if(frame) return;
+        frame = document.createElement('iframe');
+        frame.src = 'https://www.youtube-nocookie.com/embed/' + ID + '?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&playsinline=1&loop=1&playlist=' + ID + '&disablekb=1&iv_load_policy=3&fs=0';
+        frame.setAttribute('allow','autoplay; encrypted-media');
+        frame.setAttribute('tabindex','-1');
+        frame.setAttribute('title','');
+        frame.addEventListener('load', function(){ setTimeout(function(){ if(frame) frame.classList.add('ready'); }, 700); });
+        box.appendChild(frame);
+      }
+      function stop(){
+        clearTimeout(killTimer);
+        killTimer = setTimeout(function(){ if(frame){ frame.remove(); frame = null; } }, 260);
+      }
+      wrap.addEventListener('mouseenter', start);
+      wrap.addEventListener('mouseleave', stop);
+      wrap.addEventListener('focusin', start);
+      wrap.addEventListener('focusout', stop);
     })();
 
     // ---------- Subtle background parallax on scroll (eases in like the homepage hero) ----------
