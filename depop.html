@@ -93,10 +93,10 @@
     content:'';
     position:absolute;
     inset:0;
-    background:linear-gradient(180deg, rgba(10,9,7,0.72), rgba(10,9,7,0.6) 55%, rgba(10,9,7,0.82));
+    background:linear-gradient(180deg, rgba(8,7,5,0.88), rgba(8,7,5,0.82) 55%, rgba(8,7,5,0.93));
   }
   .hero-bg:not(.footer-bg)::before{
-    background:linear-gradient(180deg, rgba(10,9,7,0.60), rgba(10,9,7,0.48) 55%, rgba(10,9,7,0.70));
+    background:linear-gradient(180deg, rgba(8,7,5,0.84), rgba(8,7,5,0.76) 55%, rgba(8,7,5,0.90));
   }
   .hero-bg > *{ position:relative; z-index:1; }
   .hero-bg,
@@ -165,9 +165,20 @@
     font-weight:600;
     font-size:clamp(28px, 4.4vw, 44px);
     letter-spacing:-0.08em;
-    margin:0 0 26px;
+    margin:0 0 16px;
     display:inline-block;
     transform:scaleX(1.14);
+    transform-origin:center;
+  }
+  .project-sub{
+    margin:0 0 30px;
+    display:inline-block;
+    font-weight:700;
+    font-size:clamp(16px, 1.6vw, 20px);
+    line-height:1.4;
+    letter-spacing:-0.01em;
+    color:var(--white);
+    transform:scaleX(1.10);
     transform-origin:center;
   }
 
@@ -230,12 +241,7 @@
     transform:scaleX(1.10);
     transform-origin:left;
   }
-  .intro-copy p:first-child{
-    font-weight:700;
-    font-size:1.12em;
-    margin-bottom:22px;   /* extra space after the opening line */
-  }
-  .intro-copy p:not(:first-child){
+  .intro-copy p{
     font-size:16px;
   }
   .intro-copy .emphasis-line{
@@ -255,8 +261,7 @@
   }
 
   @media (min-width:1025px){
-    .intro-copy p:first-child{ font-size:19px; }   /* larger opening line (laptop) */
-    .project-title{ margin-bottom:40px; }   /* a bit more space under the title (laptop) */
+    .project-sub{ margin-bottom:44px; }   /* space between the centred tagline and the hero image (laptop) */
     .carousel-banner{ padding-bottom:60px; }   /* a bit more space after the posters (laptop) */
     .footer-bg{ padding-top:104px; }   /* a bit more space between the posters and "This project was made with Liesbeth" (laptop) */
     .intro{ margin-left:max(0px, calc(47vw - 388px)); margin-right:0; margin-top:-4px; }   /* hero + text sit left of centre (laptop); 47vw = centre minus 3% */
@@ -289,17 +294,22 @@
     margin-bottom:0px;
   
     padding:40px 0;
-    overflow:hidden;
+    overflow-x:auto;
+    overflow-y:hidden;
+    scrollbar-width:none;
+    -ms-overflow-style:none;
+    user-select:none;
+    -webkit-user-select:none;
   }
+  .carousel-banner::-webkit-scrollbar{ display:none; }
+  .carousel-track img{ -webkit-user-drag:none; user-drag:none; }
   .carousel-track{
     --poster-gap:28px;          /* distance between the posters */
     display:flex;
     width:max-content;
     gap:var(--poster-gap);
     padding-right:var(--poster-gap);   /* keeps the loop seamless */
-    animation:slide-left 34s linear infinite;
   }
-  .carousel-banner:hover .carousel-track{ animation-play-state:paused; }
   .carousel-track img{
     display:block;
     width:300px;
@@ -307,23 +317,14 @@
     object-fit:cover;
     flex:0 0 auto;
   }
-  @keyframes slide-left{
-    from{ transform:translateX(0); }
-    to{ transform:translateX(-50%); }
-  }
-  @media (prefers-reduced-motion: reduce){
-    .carousel-track{ animation:none; }
-  }
   @media (max-width:760px){
     .carousel-track img{ width:190px; height:250px; }
     .carousel-banner{
       margin-top:0;
       padding:44px 30px;
-      overflow-x:auto;
       -webkit-overflow-scrolling:touch;
     }
     .carousel-track{
-      animation:none !important;
       --poster-gap:18px;
     }
   }
@@ -477,7 +478,10 @@
 
     <header class="project-header">
       <p class="project-tag">concept + strategy + visuals</p>
+      <br>
       <h1 class="project-title">DEPOP — spec campaign</h1>
+      <br>
+      <p class="project-sub">The metro is fast, urban, and sustainable, just like <a class="depop-link" href="https://www.depop.com/" target="_blank" rel="noopener">Depop</a>.<br>Or what it aspires to be.</p>
     </header>
 
     <div class="intro">
@@ -488,7 +492,6 @@
         </div>
       </div>
       <div class="intro-copy">
-        <p>The metro is fast, urban, and sustainable, just like <a class="depop-link" href="https://www.depop.com/" target="_blank" rel="noopener">Depop</a>.<br>Or what it aspires to be.</p>
         <p><a class="depop-link-white" href="https://news.depop.com/who-we-are/about/" target="_blank" rel="noopener">Depop</a> is a peer-to-peer marketplace to buy, sell and discover secondhand fashion. What they're missing is a direct line to the young, urban community that already fits that identity.</p>
         <p>We found that in the Netherlands, 80% of young people rely on public transport.<br><span class="emphasis-line">While waiting, most people are glued to their phones. The only moment they do look up is when the metro arrives.</span></p>
         <p>And that's the moment we'd grab their attention and link it directly to Depop.<br>By putting stickers on the metro windows, we'd frame every outfit as a potential Depop buy or sell. Next to that we'd add a reverse image search feature in the Depop app. The easier it is to find, the easier it is to buy.</p>
@@ -499,11 +502,6 @@
 
   <div class="carousel-banner">
     <div class="carousel-track">
-      <img loading="lazy" decoding="async" src="depop-grid-01 copy.jpg" alt="Passenger in a red jacket on the metro checking her phone, 'can I find that top?'">
-      <img loading="lazy" decoding="async" src="depop-grid-02 copy.jpg" alt="Two passengers checking their phones on the metro, 'can I find that hat?'">
-      <img loading="lazy" decoding="async" src="depop-grid-03 copy.jpg" alt="Metro platform with the Depop logo overlay, 'fast, urban, sustainable'">
-      <img loading="lazy" decoding="async" src="depop-grid-04 copy.jpg" alt="Depop sticker overlay on a passenger's boots, 'can you find it?'">
-      <img loading="lazy" decoding="async" src="depop-grid-05 copy.jpg" alt="Depop sticker overlay on a passenger's bag and plaid skirt, 'can you find it?'">
       <img loading="lazy" decoding="async" src="depop-grid-01 copy.jpg" alt="Passenger in a red jacket on the metro checking her phone, 'can I find that top?'">
       <img loading="lazy" decoding="async" src="depop-grid-02 copy.jpg" alt="Two passengers checking their phones on the metro, 'can I find that hat?'">
       <img loading="lazy" decoding="async" src="depop-grid-03 copy.jpg" alt="Metro platform with the Depop logo overlay, 'fast, urban, sustainable'">
@@ -530,36 +528,105 @@
       if(!banner || !track) return;
 
       var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var mobileQuery = window.matchMedia('(max-width:760px)');
-      var isHeld = false;
+      var canHover = window.matchMedia('(hover:hover)').matches;
+      var SPEED = 45;                 // px per second, drifts to the right-to-left
+      var originals = Array.prototype.slice.call(track.children);
+      var setW = 0;                   // width of one full set of posters
+      var pos = 0;                    // float scroll position (scrollLeft rounds on some screens)
+      var held = false;               // hover / drag / touch / wheel pauses the drift
+      var dragging = false;
       var resumeTimer = null;
-      var half = 0;
+      var lastT = 0;
 
-      function isMobile(){ return mobileQuery.matches; }
-      function measure(){ half = track.scrollWidth / 2; }
-
-      function pause(){
-        isHeld = true;
-        clearTimeout(resumeTimer);
+      // repeat the posters so there is always something to scroll to on both sides
+      function build(){
+        var first = originals[0];
+        originals.forEach(function(img){
+          var c = img.cloneNode(true); c.setAttribute('aria-hidden','true'); c.setAttribute('alt',''); track.appendChild(c);
+        });
+        setW = track.children[originals.length].offsetLeft - first.offsetLeft;
+        var wide = Math.max(window.innerWidth, (window.screen && window.screen.width) || 0);
+        var sets = Math.ceil(wide / setW) + 2;
+        for(var s = 2; s < sets; s++){
+          originals.forEach(function(img){
+            var c = img.cloneNode(true); c.setAttribute('aria-hidden','true'); c.setAttribute('alt',''); track.appendChild(c);
+          });
+        }
       }
-      function scheduleResume(){
-        clearTimeout(resumeTimer);
-        resumeTimer = setTimeout(function(){ isHeld = false; }, 1000);
+      function measure(){
+        setW = track.children[originals.length].offsetLeft - originals[0].offsetLeft;
+      }
+      // keep the position inside the middle set so you can scroll either way forever
+      function wrap(x){
+        while(x >= 2 * setW) x -= setW;
+        while(x < setW) x += setW;
+        return x;
       }
 
-      banner.addEventListener('touchstart', pause, { passive:true });
-      banner.addEventListener('touchend', scheduleResume, { passive:true });
-      banner.addEventListener('touchcancel', scheduleResume, { passive:true });
-      banner.addEventListener('mousedown', pause);
-      window.addEventListener('mouseup', scheduleResume);
-      window.addEventListener('resize', measure);
+      function hold(){ held = true; clearTimeout(resumeTimer); }
+      function releaseSoon(ms){
+        clearTimeout(resumeTimer);
+        resumeTimer = setTimeout(function(){ held = false; }, ms || 1200);
+      }
 
-      measure();
+      build();
+      pos = banner.scrollLeft = setW;
+      lastT = 0;
 
-      function step(){
-        if(isMobile() && !isHeld && !reduceMotion && half > 0){
-          banner.scrollLeft += 0.6;
-          if(banner.scrollLeft >= half){ banner.scrollLeft -= half; }
+      // mouse: hover pauses, click + drag scrolls
+      if(canHover){
+        banner.addEventListener('mouseenter', hold);
+        banner.addEventListener('mouseleave', function(){ if(!dragging) releaseSoon(300); });
+      }
+      var startX = 0, startScroll = 0;
+      banner.addEventListener('pointerdown', function(e){
+        if(e.pointerType !== 'mouse') return;      // touch scrolls natively
+        dragging = true; hold();
+        startX = e.clientX; startScroll = banner.scrollLeft;
+        banner.setPointerCapture(e.pointerId);
+      });
+      banner.addEventListener('pointermove', function(e){
+        if(!dragging) return;
+        pos = wrap(startScroll - (e.clientX - startX));
+        // re-anchor if we wrapped so the drag keeps going smoothly
+        startScroll = pos + (e.clientX - startX);
+        banner.scrollLeft = pos;
+      });
+      function endDrag(){
+        if(!dragging) return;
+        dragging = false;
+        if(canHover && banner.matches(':hover')) return;   // still hovering, stay paused
+        releaseSoon(800);
+      }
+      banner.addEventListener('pointerup', endDrag);
+      banner.addEventListener('pointercancel', endDrag);
+
+      // touch + trackpad / shift-wheel: native scrolling, pause the drift while it happens
+      banner.addEventListener('touchstart', hold, { passive:true });
+      banner.addEventListener('touchend', function(){ releaseSoon(1200); }, { passive:true });
+      banner.addEventListener('touchcancel', function(){ releaseSoon(1200); }, { passive:true });
+      banner.addEventListener('wheel', function(e){
+        if(Math.abs(e.deltaX) > Math.abs(e.deltaY)){ hold(); if(!canHover) releaseSoon(1200); }
+      }, { passive:true });
+
+      // native scrolling can reach the edges of the middle set, so wrap it
+      banner.addEventListener('scroll', function(){
+        if(dragging) return;
+        var x = banner.scrollLeft;
+        var w = wrap(x);
+        if(w !== x){ banner.scrollLeft = w; }
+        if(held) pos = w;
+      }, { passive:true });
+
+      window.addEventListener('resize', function(){ measure(); pos = banner.scrollLeft = wrap(banner.scrollLeft); });
+
+      function step(t){
+        if(!lastT) lastT = t;
+        var dt = Math.min(t - lastT, 64);
+        lastT = t;
+        if(!held && !dragging && !reduceMotion && setW > 0){
+          pos = wrap(pos + SPEED * dt / 1000);
+          banner.scrollLeft = pos;
         }
         requestAnimationFrame(step);
       }
