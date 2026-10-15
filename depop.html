@@ -267,14 +267,14 @@
   }
 
   @media (min-width:1025px){
-    .project-sub{ margin-bottom:54px; }   /* space between the centred tagline and the hero image (laptop) */
+    .project-sub{ margin-bottom:44px; }   /* space between the centred tagline and the hero image (laptop) */
     .carousel-banner{ padding-bottom:60px; }   /* a bit more space after the posters (laptop) */
     .footer-bg{ padding-top:104px; }   /* a bit more space between the posters and "This project was made with Liesbeth" (laptop) */
     .intro{ margin-left:auto; margin-right:auto; margin-top:-4px; }   /* hero + text are centred on the page (laptop) */
     /* hero a bit bigger, centred (width 112% = 6% overhang each side) */
     .intro-visual{ width:112%; margin-left:-6%; margin-top:-8px; margin-bottom:0; }
-    /* description lines up with the hero video: same left and right edge (the text is stretched 1.03 x 1.10 by the scaleX rules, so 112% / 1.133 = 98.8%) */
-    .intro-copy{ margin-left:-6%; max-width:98.8%; margin-top:48px; }
+    /* description is slimmer and sits centred under the hero video (the text is stretched 1.03 x 1.10 by the scaleX rules: 582px box = ~660px of text, hero is ~806px) */
+    .intro-copy{ margin-left:30px; max-width:582px; margin-top:48px; }
     .intro{ padding-bottom:120px; }   /* pushes the white poster banner a bit lower (laptop) */
   }
 
@@ -284,13 +284,13 @@
     .bts-preview{
       display:block;
       position:absolute;
-      left:0;
-      bottom:calc(100% + 14px);
+      left:64px;
+      bottom:calc(100% + 2px);
       width:340px;
       aspect-ratio:16 / 9;
-      border-radius:10px;
+      border-radius:0;
       overflow:hidden;
-      background:#000 url('https://i.ytimg.com/vi/GMriUzdwgc4/hqdefault.jpg') center / cover no-repeat;
+      background:#000;
       box-shadow:0 14px 40px rgba(0,0,0,0.55);
       opacity:0;
       transform:translateY(8px) scale(0.97);
