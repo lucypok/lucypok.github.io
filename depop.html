@@ -165,7 +165,7 @@
     font-weight:600;
     font-size:clamp(28px, 4.4vw, 44px);
     letter-spacing:-0.08em;
-    margin:0 0 16px;
+    margin:0 0 22px;
     display:inline-block;
     transform:scaleX(1.14);
     transform-origin:center;
@@ -261,13 +261,15 @@
   }
 
   @media (min-width:1025px){
-    .project-sub{ margin-bottom:44px; }   /* space between the centred tagline and the hero image (laptop) */
+    .project-sub{ margin-bottom:54px; }   /* space between the centred tagline and the hero image (laptop) */
     .carousel-banner{ padding-bottom:60px; }   /* a bit more space after the posters (laptop) */
     .footer-bg{ padding-top:104px; }   /* a bit more space between the posters and "This project was made with Liesbeth" (laptop) */
-    .intro{ margin-left:max(0px, calc(47vw - 388px)); margin-right:0; margin-top:-4px; }   /* hero + text sit left of centre (laptop); 47vw = centre minus 3% */
-    /* hero a bit bigger and a bit further left; the text block and the gif keep their exact place */
-    .intro-visual{ width:106%; margin-left:-3%; margin-top:-8px; margin-bottom:calc(-3.3% + 8px); }
-    .intro-visual .v-side{ width:17%; right:-5.5%; bottom:-10.3%; }
+    .intro{ margin-left:auto; margin-right:auto; margin-top:-4px; }   /* hero + text are centred on the page (laptop) */
+    /* hero a bit bigger, centred (width 112% = 6% overhang each side) */
+    .intro-visual{ width:112%; margin-left:-6%; margin-top:-8px; margin-bottom:0; }
+    .intro-visual .v-side{ width:16%; right:-5%; bottom:-10.3%; }
+    /* description starts at the hero's left edge and ends at its right edge (the text is stretched 1.03 x 1.10 by the scaleX rules, so 112% / 1.133 = 98.8%); lower so the gif does not overlap it */
+    .intro-copy{ margin-left:-6%; max-width:98.8%; margin-top:92px; }
     .intro{ padding-bottom:120px; }   /* pushes the white poster banner a bit lower (laptop) */
   }
 
@@ -280,10 +282,9 @@
   }
   .depop-link-white,
   .hero-bg .depop-link-white{
-    color:var(--white);
-    font-weight:400;
-    text-decoration:underline;
-    text-underline-offset:3px;
+    color:#ff542a;
+    font-weight:700;
+    text-decoration:none;
   }
 
 
@@ -481,7 +482,7 @@
       <br>
       <h1 class="project-title">DEPOP — spec campaign</h1>
       <br>
-      <p class="project-sub">The metro is fast, urban, and sustainable, just like <a class="depop-link" href="https://www.depop.com/" target="_blank" rel="noopener">Depop</a>.<br>Or what it aspires to be.</p>
+      <p class="project-sub">The metro is fast, urban, and sustainable, just like <a class="depop-link" href="https://www.depop.com/" target="_blank" rel="noopener">Depop</a>.<br>Or at least what it aspires to be.</p>
     </header>
 
     <div class="intro">
