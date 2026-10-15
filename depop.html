@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DEPOP — spec campaign — Lucy Pokrivčáková</title>
 <!-- SEO:start -->
+<link rel="preconnect" href="https://i.ytimg.com">
+<link rel="preload" as="image" href="https://i.ytimg.com/vi/GMriUzdwgc4/maxresdefault.jpg">
 <meta name="description" content="Depop spec campaign rooted in human behaviour: metro riders only look up when it arrives. Depop wasn&#x27;t speaking to young urban people, so we met them there.">
 <link rel="canonical" href="https://lucypok.github.io/depop.html">
 <meta name="author" content="Lucy Pokrivčáková">
@@ -272,9 +274,11 @@
     .footer-bg{ padding-top:104px; }   /* a bit more space between the posters and "This project was made with Liesbeth" (laptop) */
     .intro{ margin-left:auto; margin-right:auto; margin-top:-4px; }   /* hero + text are centred on the page (laptop) */
     /* hero a bit bigger, centred (width 112% = 6% overhang each side) */
-    .intro-visual{ width:112%; margin-left:-6%; margin-top:-8px; margin-bottom:0; }
+    .intro-visual{ width:122%; margin-left:-11%; margin-top:-8px; margin-bottom:0; }
     /* description is slimmer and sits centred under the hero video (the text is stretched 1.03 x 1.10 by the scaleX rules: 582px box = ~660px of text, hero is ~806px) */
-    .intro-copy{ margin-left:30px; max-width:582px; margin-top:48px; }
+    .intro-copy{ margin-left:auto; margin-right:auto; max-width:582px; margin-top:84px; text-align:center; transform-origin:center; }
+    .intro-copy p{ transform-origin:center; }
+    .intro-copy .bts-link{ transform-origin:center; }
     .intro{ padding-bottom:120px; }   /* pushes the white poster banner a bit lower (laptop) */
   }
 
@@ -290,7 +294,7 @@
       aspect-ratio:16 / 9;
       border-radius:0;
       overflow:hidden;
-      background:#000;
+      background:#000 url('https://i.ytimg.com/vi/GMriUzdwgc4/maxresdefault.jpg') center / cover no-repeat;
       box-shadow:0 14px 40px rgba(0,0,0,0.55);
       opacity:0;
       transform:translateY(8px) scale(0.97);
@@ -699,11 +703,22 @@
         clearTimeout(killTimer);
         if(frame) return;
         frame = document.createElement('iframe');
-        frame.src = 'https://www.youtube-nocookie.com/embed/' + ID + '?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&playsinline=1&loop=1&playlist=' + ID + '&disablekb=1&iv_load_policy=3&fs=0';
+        frame.src = 'https://www.youtube-nocookie.com/embed/' + ID + '?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&playsinline=1&loop=1&playlist=' + ID + '&disablekb=1&iv_load_policy=3&fs=0&enablejsapi=1&origin=' + encodeURIComponent(location.origin);
         frame.setAttribute('allow','autoplay; encrypted-media');
         frame.setAttribute('tabindex','-1');
         frame.setAttribute('title','');
-        frame.addEventListener('load', function(){ setTimeout(function(){ if(frame) frame.classList.add('ready'); }, 700); });
+        var f = frame;
+        function reveal(){ if(frame === f) f.classList.add('ready'); }
+        f.addEventListener('load', function(){
+          try{ f.contentWindow.postMessage(JSON.stringify({event:'listening', id:1}), '*'); }catch(e){}
+          setTimeout(reveal, 3000);   // fallback if the player never reports back
+        });
+        function onMsg(e){
+          if(!f.contentWindow || e.source !== f.contentWindow) return;
+          var d = e.data; if(typeof d === 'string'){ try{ d = JSON.parse(d); }catch(x){ return; } }
+          if(d && d.info && d.info.playerState === 1){ setTimeout(reveal, 150); window.removeEventListener('message', onMsg); }
+        }
+        window.addEventListener('message', onMsg);
         box.appendChild(frame);
       }
       function stop(){
