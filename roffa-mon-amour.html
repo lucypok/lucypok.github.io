@@ -214,11 +214,23 @@
   }
   .project-body p{ margin:0 0 4px; }
   .project-body u{ text-decoration-thickness:1.5px; }
+  .project-body .role{ font-weight:600; }
+  .project-body .role-link{ color:inherit; text-decoration:underline; text-decoration-thickness:1.5px; text-underline-offset:3px; transition:opacity 0.2s ease; }
+  .project-body .role-link:hover{ opacity:0.6; }   /* the things I did get slightly more weight */
   /* the drag hint only shows where dragging works (laptop with a mouse) */
-  .project-body .project-hint{ display:none; margin-top:46px; font-size:18px; font-style:italic; }
+  .project-body .project-hint{ display:none; margin-top:46px; }   /* same size and style as the description */
   @media (min-width:1025px) and (hover:hover){
     .project-body .project-hint{ display:block; }
   }
+
+
+  /* typewriter hint */
+  .tw-bold{ font-weight:inherit; }
+  .tw-l{ visibility:hidden; }
+  .tw-l.on{ visibility:visible; }
+  .tw-w{ display:inline-block; white-space:nowrap; }
+  .tw-cursor{ display:none; }   /* no cursor line, the letters just appear */
+
 
   /* ---------- Work collage ----------
      Laptop / tablet: a loose collage. Every piece has a fixed starting spot (--x / --y / --w are % of the collage),
@@ -326,7 +338,7 @@
     letter-spacing:0;
     font-family:'Apple Symbols','Segoe UI Symbol','Noto Sans Symbols 2','DejaVu Sans',sans-serif;
   }
-  @media (min-width:761px){ .more-work{ margin-top:150px; } }
+  @media (min-width:761px){ .more-work{ margin-top:100px; } }
 
   /* ---------- Mobile ---------- */
   @media (max-width:760px){
@@ -391,7 +403,7 @@
 </style>
 <style>
   /* laptop only: a bit more space above and below "more work" (page is slightly longer) */
-  @media (min-width:761px){ .more-work{ padding-top:20px; margin-bottom:97px; } }
+  @media (min-width:761px){ .more-work{ padding-top:20px; margin-bottom:69px; } }   /* same space below as the Depop page (45px + its 24px footer padding) */
 </style>
 </head>
 <body>
@@ -418,9 +430,9 @@
   </div>
 
   <div class="project-body">
-    <p>From PR emails, writing film descriptions, managing the website, <u>posts/reels</u>, designing assets &amp; stickers to giving feedback to AV first-year students at WDKA about their trailers.</p>
+    <p>From <b class="role">PR emails</b>, <b class="role">writing <a class="role-link" href="https://roffamonamour.com/screenings/my-semba/" target="_blank" rel="noopener">film descriptions</a></b>, <b class="role">managing the website</b>, <b class="role"><a class="role-link" href="https://www.instagram.com/p/Dc1SFv4jYtH/?img_index=3" target="_blank" rel="noopener">posts</a>/<a class="role-link" href="https://www.instagram.com/p/DcD0X2xtNzH/" target="_blank" rel="noopener">reels</a></b>, <b class="role">designing assets &amp; stickers</b> to giving feedback to AV first-year students at WDKA about their <a class="role-link" href="https://www.youtube.com/playlist?list=PLSxGVntgWODM" target="_blank" rel="noopener">trailers</a>.</p>
     <p>The list is quite long and varied, as were my 6 months at RMA. However, everything clicked when I saw the festival come to life and the effect it had on people.</p>
-    <p class="project-hint">Feel free to move around my designs:)</p>
+    <p class="project-hint" aria-label="Feel free to move around my designs:)">Feel free to <span class="tw" aria-hidden="true">move around my designs:)</span></p>
   </div>
 
   <div class="work-mosaic" id="mosaic">
@@ -522,5 +534,54 @@
       b.addEventListener('click',function(){ scrollTo({top:0,behavior:'smooth'}); });
     })();
   </script>
+<script>
+  // typewriter hint: "Feel free to" stays put, "move around my designs:)" types out once, then the cursor blinks a few times and disappears
+  (function(){
+    var host = document.querySelector('.project-hint .tw');
+    if(!host) return;
+    var letters = [];
+    function build(node){
+      Array.prototype.slice.call(node.childNodes).forEach(function(n){
+        if(n.nodeType === 3){
+          var frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach(function(part){
+            if(!part) return;
+            if(/^\s+$/.test(part)){ frag.appendChild(document.createTextNode(' ')); return; }
+            var w = document.createElement('span'); w.className = 'tw-w';
+            part.split('').forEach(function(ch){
+              var l = document.createElement('span'); l.className = 'tw-l'; l.textContent = ch;
+              w.appendChild(l); letters.push(l);
+            });
+            frag.appendChild(w);
+          });
+          node.replaceChild(frag, n);
+        } else if(n.nodeType === 1){ build(n); }
+      });
+    }
+    build(host);
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches){ letters.forEach(function(l){ l.classList.add('on'); }); return; }
+    var cursor = document.createElement('span'); cursor.className = 'tw-cursor';
+    letters[0].parentNode.insertBefore(cursor, letters[0]);
+    var i = 0;
+    function step(){
+      if(i >= letters.length){ setTimeout(function(){ cursor.remove(); }, 3200); return; }
+      var l = letters[i++]; l.classList.add('on');
+      l.parentNode.insertBefore(cursor, l.nextSibling);
+      setTimeout(step, 55 + Math.random()*55);
+    }
+        // wait until the moon has made 2 passes over the photo (one pass = 14s) before the typing starts
+    var MOON_PASSES = 2;
+    function afterMoon(fn){
+      var moon = document.querySelector('.moon');
+      if(!moon || getComputedStyle(moon).animationName === 'none'){ fn(); return; }
+      var passes = 0;
+      moon.addEventListener('animationiteration', function onIter(e){
+        if(e.target !== moon) return;
+        if(++passes >= MOON_PASSES){ moon.removeEventListener('animationiteration', onIter); fn(); }
+      });
+    }
+    afterMoon(function(){ setTimeout(step, 700); });
+  })();
+</script>
 </body>
 </html>
