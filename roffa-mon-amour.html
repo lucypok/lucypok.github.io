@@ -569,18 +569,16 @@
       l.parentNode.insertBefore(cursor, l.nextSibling);
       setTimeout(step, 55 + Math.random()*55);
     }
-        // wait until the moon has made 2 passes over the photo (one pass = 14s) before the typing starts
-    var MOON_PASSES = 2;
-    function afterMoon(fn){
-      var moon = document.querySelector('.moon');
-      if(!moon || getComputedStyle(moon).animationName === 'none'){ fn(); return; }
-      var passes = 0;
-      moon.addEventListener('animationiteration', function onIter(e){
-        if(e.target !== moon) return;
-        if(++passes >= MOON_PASSES){ moon.removeEventListener('animationiteration', onIter); fn(); }
-      });
+        // start typing once the hint has scrolled into view (only once)
+    function whenVisible(fn){
+      var el = document.querySelector('.project-hint');
+      if(!el || !('IntersectionObserver' in window)){ fn(); return; }
+      var io = new IntersectionObserver(function(entries){
+        if(entries.some(function(e){ return e.isIntersecting; })){ io.disconnect(); fn(); }
+      }, { threshold:0.9, rootMargin:'0px 0px -8% 0px' });
+      io.observe(el);
     }
-    afterMoon(function(){ setTimeout(step, 700); });
+    whenVisible(function(){ setTimeout(step, 400); });
   })();
 </script>
 </body>
