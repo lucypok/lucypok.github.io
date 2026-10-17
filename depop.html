@@ -509,6 +509,17 @@
   /* laptop only: a bit more space above and below "more work" (page is slightly longer) */
   @media (min-width:761px){ .more-work{ padding-top:20px; margin-bottom:45px; } }
 </style>
+<style>
+  /* phone adjustments */
+  @media (max-width:760px){
+    .intro-visual{ width:calc(100% + 28px); max-width:none; margin-left:-14px; }   /* bigger hero video */
+    .intro-copy{ max-width:80%; margin:26px auto 0; text-align:center; transform-origin:center; }   /* slimmer, a bit higher, centred */
+    .intro-copy p{ transform-origin:center; }
+    .intro-copy .bts-link{ font-size:18px; transform-origin:center; }   /* bigger "Watch video" */
+    .carousel-track img{ width:220px; height:288px; }   /* bigger posters */
+    .carousel-banner{ padding:25px 30px; }               /* banner keeps the same height */
+  }
+</style>
 </head>
 <body>
 
@@ -533,7 +544,8 @@
         </div>
       </div>
       <div class="intro-copy">
-        <p><a class="depop-link-white" href="https://news.depop.com/who-we-are/about/" target="_blank" rel="noopener">Depop</a> is a peer-to-peer marketplace to buy, sell and discover secondhand fashion. What they're missing is a direct line to the young, urban community that already fits that identity.</p>
+        <p><a class="depop-link-white" href="https://news.depop.com/who-we-are/about/" target="_blank" rel="noopener">Depop</a> is a peer-to-peer marketplace to buy, sell and discover secondhand fashion. </p>
+        <p>What they're missing is a direct line to the young, urban community that already fits that identity.</p>
         <p>We found that in the Netherlands, 80% of young people rely on public transport.<br><span class="emphasis-line">While waiting, most people are glued to their phones. The only moment they do look up is when the metro arrives.</span></p>
         <p>And that's the moment we'd grab their attention and link it directly to Depop.<br>By putting stickers on the metro windows, we'd frame every outfit as a potential Depop buy or sell. Next to that we'd add a reverse image search feature in the Depop app. The easier it is to find, the easier it is to buy.</p>
         <div class="bts-wrap">
