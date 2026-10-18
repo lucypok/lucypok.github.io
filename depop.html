@@ -527,8 +527,16 @@
 <style>
   /* phone: hero video a touch wider than the text, slightly zoomed in so the edges are cropped a little */
   @media (max-width:760px){
-    .intro-visual{ width:calc(100% + 36px); max-width:none; margin-left:-18px; margin-right:0; overflow:hidden; }
+    .intro-visual{ width:calc(100vw + 28px); max-width:none; margin-left:calc(50% - 50vw - 14px); margin-right:0; overflow:hidden; }   /* runs 14px past each screen edge */
     .intro-visual video{ width:100%; height:auto; aspect-ratio:auto; transform:scale(1.07); transform-origin:center; }
+  }
+</style>
+<style>
+  /* phone: description text less stretched */
+  @media (max-width:760px){
+    .intro-copy{ max-width:86%; transform:none; }
+    .intro-copy p{ transform:scaleX(1.04); }
+    .intro-copy .bts-link{ transform:scaleX(1.04); }
   }
 </style>
 </head>
