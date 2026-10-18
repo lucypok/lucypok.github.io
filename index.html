@@ -516,6 +516,20 @@
     .footer-social svg{ width:22px; height:22px; }
   }
 </style>
+<style>
+  /* phone only: project order (laptop keeps the original order) */
+  @media (max-width:760px){
+    .work-grid{ display:flex; flex-direction:column; }
+    .work-grid a[href="hickey.html"] .work-card{ order:1; }
+    .work-grid a[href="hyperraar.html"] .work-card{ order:2; }
+    .work-grid a[href="depop.html"] .work-card{ order:3; }
+    .work-grid a[href="roffa-mon-amour.html"] .work-card{ order:4; }
+    .work-grid a[href="easyride.html"] .work-card{ order:5; }
+    .work-grid a[href="stain.html"] .work-card{ order:6; }
+    .work-grid a[href*="youtube.com"] .work-card{ order:7; }
+    .work-grid a[href="personal-projects.html"] .work-card{ order:8; }
+  }
+</style>
 </head>
 <body>
   <canvas id="trail" aria-hidden="true"></canvas>

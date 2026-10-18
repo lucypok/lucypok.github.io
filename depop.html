@@ -513,11 +513,22 @@
   /* phone adjustments */
   @media (max-width:760px){
     .intro-visual{ width:calc(100% + 28px); max-width:none; margin-left:-14px; }   /* bigger hero video */
-    .intro-copy{ max-width:80%; margin:26px auto 0; text-align:center; transform-origin:center; }   /* slimmer, a bit higher, centred */
-    .intro-copy p{ transform-origin:center; }
-    .intro-copy .bts-link{ font-size:18px; transform-origin:center; }   /* bigger "Watch video" */
+    .intro-copy{ max-width:80%; margin:26px 0 0 10px; text-align:left; transform-origin:left; }   /* slimmer, a bit higher, centred */
+    .intro-copy p{ transform-origin:left; }
+    .intro-copy .bts-link{ font-size:15px; transform-origin:left; }   /* bigger "Watch video" */
     .carousel-track img{ width:220px; height:288px; }   /* bigger posters */
     .carousel-banner{ padding:25px 30px; }               /* banner keeps the same height */
+    .bottom-credit img{ width:140px; }                   /* smaller Liesbeth photo */
+  }
+</style>
+<style>
+  .intro-copy .bold-key{ font-weight:700; color:var(--white); }
+</style>
+<style>
+  /* phone: hero video a touch wider than the text, slightly zoomed in so the edges are cropped a little */
+  @media (max-width:760px){
+    .intro-visual{ width:calc(100% + 36px); max-width:none; margin-left:-18px; margin-right:0; overflow:hidden; }
+    .intro-visual video{ width:100%; height:auto; aspect-ratio:auto; transform:scale(1.07); transform-origin:center; }
   }
 </style>
 </head>
@@ -546,8 +557,9 @@
       <div class="intro-copy">
         <p><a class="depop-link-white" href="https://news.depop.com/who-we-are/about/" target="_blank" rel="noopener">Depop</a> is a peer-to-peer marketplace to buy, sell and discover secondhand fashion. </p>
         <p>What they're missing is a direct line to the young, urban community that already fits that identity.</p>
-        <p>We found that in the Netherlands, 80% of young people rely on public transport.<br><span class="emphasis-line">While waiting, most people are glued to their phones. The only moment they do look up is when the metro arrives.</span></p>
-        <p>And that's the moment we'd grab their attention and link it directly to Depop.<br>By putting stickers on the metro windows, we'd frame every outfit as a potential Depop buy or sell. Next to that we'd add a reverse image search feature in the Depop app. The easier it is to find, the easier it is to buy.</p>
+        <p>Nearly 1 in 5 Dutch 18- to 25-year-olds ride public transport (almost) daily (<a href="https://longreads.cbs.nl/klimaatverandering-en-energietransitie-2023/duurzame-mobiliteit/" target="_blank" rel="noopener" style="text-decoration:underline;text-underline-offset:3px;">CBS, 2022</a>). That's a lot of waiting.</p>
+        <p><span class="emphasis-line" style="margin-top:0;">But while waiting, most people are glued to their phones. The only moment they do look up is when the metro arrives.</span></p>
+        <p>And that's the moment we'd grab their attention and link it directly to Depop.<br>By putting <strong class="bold-key">stickers</strong> on the metro windows, we'd frame every outfit as a potential Depop buy or sell. Next to that we'd add a <strong class="bold-key">reverse image search</strong> feature in the Depop app. The easier it is to find, the easier it is to buy.</p>
         <div class="bts-wrap">
           <a class="bts-link" href="https://www.youtube.com/watch?v=GMriUzdwgc4" target="_blank" rel="noopener"> Watch video from the shoot :)</a>
           <div class="bts-preview" aria-hidden="true"></div>
