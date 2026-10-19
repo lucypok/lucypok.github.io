@@ -84,6 +84,8 @@
   .project-subtitle{ font-weight:600; font-size:clamp(14px, 1.6vw, 17px); margin:0 0 26px; color:var(--ink); display:block; transform:scaleX(1.15); }
   .intro-lead{ max-width:800px; margin:0 auto; padding:0 28px 56px; text-align:center; font-size:16px; line-height:1.65; letter-spacing:-0.01em; font-weight:600; }
   .intro-lead > span{ display:inline-block; transform:scaleX(1.10); transform-origin:center; margin-right:0.32em; }
+  .hl{ color:var(--pink); font-weight:800; }
+  .how-copy b{ font-weight:700; }
   .brand-link{ color:var(--pink); font-weight:700; text-decoration:underline; text-underline-offset:3px; }
   .top-band{ position:relative; background:#fff5f8 url('easyride-road-bg copy.png') center bottom / cover no-repeat; }
   .hero-visual-section{ padding:0; }
@@ -238,6 +240,49 @@
 <style>
   @media (max-width:760px){ .carousel-track img{ width:168px; } }   /* bigger posters on phone */
 </style>
+<style>
+  /* laptop only: bigger intro text + click-to-enlarge slide viewer */
+  @media (min-width:761px){
+    .deck-grid-item{ cursor:pointer; }
+    .intro-lead{ font-size:17px; }
+    .how-inner{ max-width:760px; }
+  }
+  .lb{ display:none; }
+  @media (min-width:761px){
+    .lb{
+      display:flex; align-items:center; justify-content:center;
+      position:fixed; inset:0; z-index:1000;
+      background:rgba(255,248,251,0.95);
+      -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+      opacity:0; pointer-events:none; transition:opacity 0.25s ease;
+    }
+    .lb.open{ opacity:1; pointer-events:auto; }
+    .lb-img{
+      max-width:min(1200px, calc(100vw - 220px)); max-height:calc(100vh - 150px);
+      width:auto; height:auto; display:block;
+      box-shadow:0 30px 60px -20px rgba(111,30,68,0.45);
+      background:var(--white);
+      transition:opacity 0.18s ease;
+    }
+    .lb-img.swap{ opacity:0; }
+    .lb-btn{
+      position:absolute; display:flex; align-items:center; justify-content:center;
+      width:44px; height:44px; padding:0; border-radius:50%;
+      border:1.5px solid var(--pink); background:var(--white); color:var(--pink);
+      cursor:pointer; transition:background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+    .lb-btn:hover{ background:var(--pink); color:#fff; transform:scale(1.08); }
+    .lb-btn svg{ width:20px; height:20px; display:block; }
+    .lb-prev{ left:36px; top:50%; margin-top:-22px; }
+    .lb-next{ right:36px; top:50%; margin-top:-22px; }
+    .lb-close{ top:28px; right:36px; }
+    .lb-count{
+      position:absolute; bottom:28px; left:0; right:0; text-align:center;
+      font-size:13px; font-weight:700; letter-spacing:0.05em; color:var(--pink);
+    }
+    body.lb-lock{ overflow:hidden; }
+  }
+</style>
 </head>
 <body>
 
@@ -290,13 +335,12 @@
 
   <section class="how-section">
     <div class="how-inner">
-      <h2 class="how-title">How we got there<span class="punct" data-punct-cycle=":.?!">?</span></h2>
       <div class="how-copy">
-        <p>Together with <b>Liesbeth</b>, we joined <a href="https://jongehonden.nl/" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline; text-underline-offset:3px;">Jonge Honden/Young Dogs</a>' last pitch of 2026 for EasyToys.</p>
-        <p>EasyToys, one of Europe's largest platforms for sexual wellness and intimacy, was turning 20. They didn't want a traditional PR birthday campaign; they wanted something non-traditional enough to actually get talked about while navigating bans and restrictions.</p>
-        <p>EasyToys is based in the Netherlands. And what's more Dutch than riding a bike? Unfortunately, biking is SO Dutch that even children ride it, and we needed something strictly for adults.</p>
-        <p>That's where road cycling came in, a much more obsessive, adult subculture. Turns out the two worlds had more in common than we expected.</p>
-        <p>With the perfect audience and shared vocabulary, we ended up with a poster campaign, a bike lube for a different kind of ride, and a Strava trail of reviews hiding in plain sight.</p>
+        <p>Together with <b>Liesbeth</b>, we joined <a href="https://jongehonden.nl/" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline; text-underline-offset:3px;">Jonge Honden/Young Dogs</a>’ last pitch of 2026 for EasyToys.</p>
+        <p>EasyToys, one of Europe’s largest sexual wellness platforms, was turning 20. Instead of a birthday campaign with balloons, they wanted to get people talking, while navigating bans and restrictions.</p>
+        <p>Based in the Netherlands, they had one obvious place to start: the bicycle. But cycling is so Dutch that everyone does it, even children. And they needed something strictly for adults.</p>
+        <p>That’s where road cycling came in, an obsessive subculture with its own rituals, vocabulary and a surprising amount in common with pleasure.</p>
+        <p>The result? A <span class="hl">poster campaign</span>, a <span class="hl">bike lube</span> made for a different kind of ride, and a trail of reviews hidden in plain sight on <span class="hl">Strava</span>.</p>
       </div>
     </div>
   </section>
@@ -424,6 +468,14 @@
 
   
 
+  <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Campaign slides">
+    <button class="lb-btn lb-close" type="button" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <button class="lb-btn lb-prev" type="button" aria-label="Previous slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <img class="lb-img" id="lbImg" src="" alt="">
+    <button class="lb-btn lb-next" type="button" aria-label="Next slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+    <div class="lb-count" id="lbCount"></div>
+  </div>
+
   <button class="up-btn" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg></button>
   <script>
     // back-to-top arrow (phone only): fades in when you are near the bottom of the page
@@ -432,6 +484,40 @@
       function update(){ var left=document.documentElement.scrollHeight-(window.scrollY+window.innerHeight); b.classList.toggle('show', window.scrollY>200 && left<700); }
       addEventListener('scroll',update,{passive:true}); addEventListener('resize',update); update();
       b.addEventListener('click',function(){ scrollTo({top:0,behavior:'smooth'}); });
+    })();
+  </script>
+  <script>
+    // laptop only: click a slide to see it big in the middle, arrows (or keyboard) to go through them
+    (function(){
+      var lb=document.getElementById('lb'), img=document.getElementById('lbImg'), count=document.getElementById('lbCount');
+      var items=[].slice.call(document.querySelectorAll('#deckGrid .deck-grid-item img'));
+      if(!lb||!img||!items.length) return;
+      var desktop=window.matchMedia('(min-width:761px)');
+      var cur=0;
+      function show(i, quick){
+        cur=(i+items.length)%items.length;
+        var src=items[cur].currentSrc||items[cur].src, alt=items[cur].alt;
+        if(quick){ img.src=src; img.alt=alt; }
+        else{
+          img.classList.add('swap');
+          setTimeout(function(){ img.src=src; img.alt=alt; img.classList.remove('swap'); }, 140);
+        }
+        count.textContent=(cur+1)+' / '+items.length;
+      }
+      function open(i){ show(i,true); lb.classList.add('open'); document.body.classList.add('lb-lock'); }
+      function close(){ lb.classList.remove('open'); document.body.classList.remove('lb-lock'); }
+      items.forEach(function(el,i){ el.parentNode.addEventListener('click',function(){ if(desktop.matches) open(i); }); });
+      lb.querySelector('.lb-prev').addEventListener('click',function(e){ e.stopPropagation(); show(cur-1); });
+      lb.querySelector('.lb-next').addEventListener('click',function(e){ e.stopPropagation(); show(cur+1); });
+      lb.querySelector('.lb-close').addEventListener('click',close);
+      lb.addEventListener('click',function(e){ if(e.target===lb) close(); });
+      document.addEventListener('keydown',function(e){
+        if(!lb.classList.contains('open')) return;
+        if(e.key==='Escape') close();
+        else if(e.key==='ArrowLeft') show(cur-1);
+        else if(e.key==='ArrowRight') show(cur+1);
+      });
+      desktop.addEventListener&&desktop.addEventListener('change',function(){ if(!desktop.matches) close(); });
     })();
   </script>
 </body>
