@@ -110,7 +110,7 @@
   .project-header{
     max-width:1000px;
     margin:0 auto;
-    padding:30px 28px 6px;
+    padding:40px 28px 6px;           /* same spot as every other project page */
     text-align:center;
     position:relative;
     z-index:5;
@@ -119,13 +119,20 @@
     font-weight:600;
     font-size:18px;
     margin:0 0 10px;
+    letter-spacing:-0.02em;
+    display:inline-block;
+    transform:scaleX(1.08);
     color:var(--yellow-soft);
   }
   .project-title{
-    font-weight:700;
-    font-size:clamp(30px, 4.6vw, 48px);
-    letter-spacing:-0.04em;
+    font-weight:600;
+    font-size:clamp(28px, 4.4vw, 44px);
+    letter-spacing:-0.08em;
     margin:0 0 26px;
+    line-height:1.1;
+    display:inline-block;
+    transform:scaleX(1.14);
+    transform-origin:center;
     color:var(--yellow-bright);
   }
 
@@ -346,7 +353,6 @@
     .nav-mark{ font-size:17px; margin-left:0; }
     .nav-back{ font-size:13px; }
     .project-header{ padding:24px 24px 6px; }
-    .project-title{ font-size:clamp(26px, 7vw, 34px); }
     .hero-wrap{ padding:10px 40px 0; }   /* team photo a bit smaller on phone */
     .hero-frame{ border-width:4px; border-radius:20px; }
     .work-mosaic{ margin-top:40px; }
@@ -358,7 +364,6 @@
   /* ---------- Laptop: intro fits on two lines, photo sits higher ---------- */
   @media (min-width:1025px){
     .more-work{ margin-bottom:52px; }   /* sits close to the bottom edge of the page, like the other project pages */
-    .project-header{ padding-top:18px; }
     .project-title{ margin-bottom:20px; }
     .project-intro{ max-width:1180px; padding-bottom:40px; text-wrap:balance; }
     .hero-wrap{ padding-top:0; }
@@ -504,6 +509,24 @@
     .more-work{ margin-top:10px; margin-bottom:30px; }
   }
   .moon{ animation-duration:24s; }
+</style>
+<style>
+  /* round 6: much shorter page + moon starts moving sooner */
+  /* the empty "moon room" under the collage is gone: the moon now sits on the bottom edge of the page content
+     (behind the collage) instead of needing its own 400px of blank space */
+  .hero-wrap{ min-height:0; margin-top:0; padding:0; }
+  .hero-wrap .moon{ top:auto; bottom:0; margin-top:0; }
+  @media (min-width:761px){
+    .hero-wrap{ min-height:0; margin-top:0; }
+    .more-work{ margin-top:50px; padding-top:0; margin-bottom:30px; }
+  }
+  @media (max-width:760px){
+    .hero-wrap{ margin-top:0; }
+    .more-work{ margin-top:40px; margin-bottom:60px; }
+  }
+  /* shorter trip, a quicker start (no slow ease-in) and it is already part-way up the moment the page opens */
+  .moon{ animation:moon-diag 18s cubic-bezier(.3,0,.5,1) -5s infinite alternate; }
+  @media (prefers-reduced-motion: reduce){ .moon{ animation:none; } }
 </style>
 </head>
 <body>
