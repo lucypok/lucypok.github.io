@@ -536,6 +536,53 @@
     .more-work{ margin-top:150px; }
   }
 </style>
+<style>
+  /* ---------- PHONE ONLY: swipeable carousels (laptop / tablet layout is untouched) ---------- */
+  .car-group, .car, .car-slide, .stk-group{ display:contents; }
+  .car-dots{ display:none; }
+  @media (max-width:760px){
+    /* crossed-out pieces are left out on phone */
+    .work-mosaic .piece--ad, .work-mosaic .piece--floor, .work-mosaic .piece--hide-m{ display:none; }
+
+    /* stickers stay as they were: a row of three */
+    .stk-group{ display:flex; flex-wrap:wrap; gap:0 12px; width:100%; order:1; }
+    .car-group--works{ order:2; }
+    .car-group--ig{ order:3; }
+
+    .car-group{ display:block; width:100%; }
+    .car{
+      position:relative;
+      display:flex; align-items:flex-start; gap:12px;
+      margin:0 -24px; padding:0 24px; scroll-padding:0 24px;
+      overflow-x:auto; overscroll-behavior-x:contain;
+      scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+    }
+    .car::-webkit-scrollbar{ display:none; }
+    .car > .piece, .car > .car-slide{ flex:0 0 82%; width:auto; margin:0; scroll-snap-align:start; }
+
+    /* one carousel, in your numbered order: 1 emo sheet, 2 paper + people as one picture, 3 advertisements, 4 signs */
+    .car > .piece--emo{ order:1; }
+    .car > .car-slide{ order:2; display:flex; flex-direction:column; }
+    .car > .piece--super{ order:3; }
+    .car > .piece--video{ order:4; }
+    .car-slide .piece{ width:100%; margin:0; }
+
+    .car-group--ig .car > .piece--embed{ flex-basis:72%; max-width:300px; }
+    .car .shield{ display:block; }     /* swipes pass through to the carousel, a tap opens the post */
+
+    .car-dots{ display:flex; justify-content:center; gap:7px; margin-top:14px; }
+    .car-dots button{
+      width:7px; height:7px; padding:0; border:0; border-radius:50%;
+      background:var(--yellow-soft); opacity:0.3; transition:opacity .2s ease;
+    }
+    .car-dots button.on{ opacity:1; }
+  }
+</style>
+<style>
+  /* phone only: the bold role links (film descriptions, posts / reels) are not underlined */
+  @media (max-width:760px){ .project-intro .role .role-link{ text-decoration:none; } }
+</style>
 </head>
 <body>
 
@@ -553,7 +600,7 @@
 
   <div class="work-mosaic" id="mosaic">
 
-    <figure class="piece piece--sticker" style="--x:5.43; --y:2.11; --w:10.96;">
+    <div class="stk-group"><figure class="piece piece--sticker" style="--x:5.43; --y:2.11; --w:10.96;">
       <img loading="lazy" decoding="async" src="pink copy.png" alt="Sticker reading almost cried" draggable="false">
       <span class="tag" style="--tx:95; --ty:-17.4;">stickers</span>
     </figure>
@@ -562,9 +609,9 @@
     </figure>
     <figure class="piece piece--sticker" style="--x:5.86; --y:20.66; --w:11.77;">
       <img loading="lazy" decoding="async" src="green copy.png" alt="Sticker reading mirror to my ego" draggable="false">
-    </figure>
+    </figure></div>
 
-    <figure class="piece" style="--x:31.29; --y:5.51; --w:16.64;">
+    <div class="car-group car-group--works"><div class="car"><figure class="piece piece--emo" style="--x:31.29; --y:5.51; --w:16.64;">
       <img loading="lazy" decoding="async" src="EMO_Data_-_SELECTED copy.png" alt="Film emotional feedback sheet template" draggable="false">
       <span class="tag tag--center tag--small" style="--tx:0; --ty:-11.7;">film emo-feedback sheets</span>
     </figure>
@@ -575,27 +622,27 @@
     <figure class="piece piece--ad piece--front" style="--x:52.50; --y:23.58; --w:21.43;">
       <img loading="lazy" decoding="async" src="FOODBANK_-_the_TEMPLATE_2 copy.jpg" alt="Take Me Home film advertisement" draggable="false">
     </figure>
-    <figure class="piece" style="--x:77.14; --y:1.30; --w:18.75;">
+    <figure class="piece piece--super" style="--x:77.14; --y:1.30; --w:18.75;">
       <img loading="lazy" decoding="async" src="supermarket copy.jpg" alt="Advertisement displayed on a supermarket TV screen" draggable="false">
       <span class="tag tag--center" style="--tx:0; --ty:-8.6;">advertisements</span>
     </figure>
 
-    <figure class="piece" style="--x:18.43; --y:68.15; --w:20.17;">
+    <figure class="piece piece--video" style="--x:18.43; --y:68.15; --w:20.17;">
       <video src="meetup-point copy.mp4" poster="meetup-point-poster copy.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Meet-up point sign animation on the festival screen"></video>
       <span class="tag" style="--tx:36; --ty:106.4;">signs/animations</span>
     </figure>
-    <figure class="piece" style="--x:35.79; --y:41.41; --w:20.25;">
+    <div class="car-slide"><figure class="piece" style="--x:35.79; --y:41.41; --w:20.25;">
       <img loading="lazy" decoding="async" src="paper copy.jpg" alt="Feedback sheet held in hand" draggable="false">
     </figure>
     <figure class="piece piece--front" style="--x:43.07; --y:60.61; --w:21.63;">
       <img loading="lazy" decoding="async" src="people copy.jpg" alt="Festival audience filling out feedback sheets" draggable="false">
-    </figure>
+    </figure></div>
     <figure class="piece piece--floor" style="--x:55.86; --y:81.76; --w:17.21;">
       <img loading="lazy" decoding="async" src="badweatherfloorplan-updated__1___1_ copy.png" alt="Venue floor plan" draggable="false">
       <span class="tag" style="--tx:30; --ty:111.7;">floorplans</span>
-    </figure>
+    </figure></div><div class="car-dots"></div></div>
 
-    <figure class="piece piece--embed" style="--x:84.93; --y:31.85; --w:11;">
+    <div class="car-group car-group--ig"><div class="car"><figure class="piece piece--embed" style="--x:84.93; --y:31.85; --w:11;">
       <div class="embed-frame"><iframe class="ig" src="https://www.instagram.com/p/Dew4ryWl39a/embed/" loading="lazy" allowtransparency="true" allowfullscreen scrolling="no" frameborder="0" title="Instagram post 1"></iframe></div>
       <div class="shield" data-href="https://www.instagram.com/p/Dew4ryWl39a/" aria-hidden="true"></div>
     </figure>
@@ -611,7 +658,7 @@
       <div class="shield" data-href="https://www.instagram.com/p/DcgZfNlF_Tz/" aria-hidden="true"></div>
     </figure>
 
-    <figure class="piece piece--embed" style="--x:68.43; --y:42.78; --w:11;">
+    <figure class="piece piece--embed piece--hide-m" style="--x:68.43; --y:42.78; --w:11;">
       <div class="embed-frame"><iframe class="ig" src="https://www.instagram.com/p/DcD0X2xtNzH/embed/" loading="lazy" allowtransparency="true" allowfullscreen scrolling="no" frameborder="0" title="Instagram post 5"></iframe></div>
       <div class="shield" data-href="https://www.instagram.com/p/DcD0X2xtNzH/" aria-hidden="true"></div>
     </figure>
@@ -619,7 +666,7 @@
     <figure class="piece piece--embed" style="--x:4.36; --y:39.30; --w:11;">
       <div class="embed-frame"><iframe class="ig" src="https://www.instagram.com/p/DeKVHe0Io40/embed/" loading="lazy" allowtransparency="true" allowfullscreen scrolling="no" frameborder="0" title="Instagram post 6"></iframe></div>
       <div class="shield" data-href="https://www.instagram.com/p/DeKVHe0Io40/" aria-hidden="true"></div>
-    </figure>
+    </figure></div><div class="car-dots"></div></div>
 
   </div>
 
@@ -718,6 +765,39 @@
         moon.style.setProperty('--rise', Math.max(0,top)+'px');
       }
       setRise(); addEventListener('load',setRise); addEventListener('resize',setRise);
+    })();
+  </script>
+  <script>
+    // phone only: carousel dots + tapping an Instagram post opens it
+    (function(){
+      var mq=matchMedia('(max-width:760px)');
+      var groups=[].slice.call(document.querySelectorAll('.car-group'));
+      function items(car){ return [].slice.call(car.children).filter(function(i){ return getComputedStyle(i).display!=='none'; }); }
+      function pad(car){ return parseFloat(getComputedStyle(car).paddingLeft)||0; }
+      groups.forEach(function(g){
+        var car=g.querySelector('.car'), dots=g.querySelector('.car-dots'), btns=[];
+        function build(){
+          dots.innerHTML=''; btns=[];
+          if(!mq.matches) return;
+          items(car).forEach(function(it,i){
+            var b=document.createElement('button'); b.type='button'; b.setAttribute('aria-label','Go to item '+(i+1));
+            b.addEventListener('click',function(){ car.scrollTo({left:it.offsetLeft-pad(car),behavior:'smooth'}); });
+            dots.appendChild(b); btns.push(b);
+          });
+          update();
+        }
+        function update(){
+          var its=items(car), best=0, bd=1e9;
+          if(car.scrollLeft>=car.scrollWidth-car.clientWidth-2) best=its.length-1;
+          else its.forEach(function(it,i){ var d=Math.abs(it.offsetLeft-pad(car)-car.scrollLeft); if(d<bd){bd=d;best=i;} });
+          btns.forEach(function(b,i){ b.classList.toggle('on',i===best); });
+        }
+        car.addEventListener('scroll',update,{passive:true});
+        addEventListener('resize',build); build();
+      });
+      [].slice.call(document.querySelectorAll('.shield')).forEach(function(sh){
+        sh.addEventListener('click',function(){ if(mq.matches) window.open(sh.dataset.href,'_blank','noopener'); });
+      });
     })();
   </script>
 </body>
