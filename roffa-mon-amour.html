@@ -426,13 +426,12 @@
 </style>
 <style>
   /* version 2, round 2 */
-  .moon{ display:none; }
   .project-intro .project-hint{ display:none; }                    /* only where dragging works */
   @media (min-width:1025px){
     .project-intro{ font-size:18px; line-height:1.5; }             /* slightly bigger intro on laptop */
   }
   @media (min-width:1025px) and (hover:hover){
-    .project-intro .project-hint{ display:inline; font-weight:600; }
+    .project-intro .project-hint{ display:block; margin-top:8px; font-weight:600; }
   }
   .tag--small{ font-size:12px; }
   @media (min-width:761px){ .tag--small{ font-size:1.1cqw; } }     /* slightly smaller than the other labels */
@@ -442,6 +441,11 @@
   .hero-wrap{ margin-top:30px; padding-top:0; }
   @media (min-width:761px){ .hero-wrap{ margin-top:34px; } }
   @media (max-width:760px){ .hero-wrap{ margin-top:30px; } }
+</style>
+<style>
+  /* intro paragraph as narrow as the "From PR emails…" text block */
+  .project-intro{ max-width:820px; }
+  @media (min-width:1025px){ .project-intro{ max-width:820px; padding-bottom:40px; text-wrap:pretty; } }
 </style>
 </head>
 <body>
@@ -456,7 +460,7 @@
     <h1 class="project-title">Roffa Mon Amour<br class="t-br"> — Internship</h1>
   </header>
 
-  <p class="project-intro"><a href="https://roffamonamour.com/" target="_blank" rel="noopener"><strong>Roffa Mon Amour</strong></a> is an open-air arthouse film festival in Rotterdam screening daring films, with events all through the year and a 12-day festival in August. My role was in the Marketing department. <span class="project-hint">Move around my designs for it:)</span></p>
+  <p class="project-intro"><a href="https://roffamonamour.com/" target="_blank" rel="noopener"><strong>Roffa Mon Amour</strong></a> is an open-air arthouse film festival in Rotterdam screening daring films, with events all through the year and a 12-day festival in August. <span class="project-hint">Move around my designs for it:)</span></p>
 
   <div class="work-mosaic" id="mosaic">
 
@@ -510,6 +514,9 @@
   </div>
 
   <div class="hero-wrap">
+    <div class="moon">
+      <img src="moon copy.png" alt="">
+    </div>
     <div class="hero-frame">
       <img src="teampicture copy.jpeg" alt="Roffa Mon Amour team on the red carpet">
     </div>
