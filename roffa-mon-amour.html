@@ -472,6 +472,30 @@
   .hero-wrap{ margin-top:30px; }
   @media (min-width:761px){ .hero-wrap{ margin-top:70px; } }
 </style>
+<style>
+  /* round 3: collage laid out like the new screenshot, hint a little lower, shorter page */
+  @media (min-width:1025px) and (hover:hover){
+    .project-intro .project-hint{ margin-top:46px; }   /* "Move around my work:)" sits a bit lower */
+    .project-intro{ padding-bottom:18px; }             /* ...and the collage stays exactly where it was */
+  }
+  @media (min-width:761px){
+    .hero-wrap{ min-height:400px; }                    /* less empty space under the moon */
+    .more-work{ margin-top:60px; margin-bottom:45px; }
+  }
+</style>
+<style>
+  /* round 4: the moon drifts diagonally, from the bottom-left corner up to the top-right corner and back */
+  .moon{
+    --rise:min(440px, 70vw);   /* how far it climbs on the way to the top-right */
+    animation:moon-diag 16s ease-in-out infinite alternate;
+  }
+  .moon img{ animation:none; }
+  @keyframes moon-diag{
+    from{ transform:translate(calc(-50vw + var(--moon) / 2), 0); }                       /* bottom-left corner */
+    to{   transform:translate(calc(50vw - var(--moon) / 2), calc(-1 * var(--rise))); }   /* top-right corner */
+  }
+  @media (prefers-reduced-motion: reduce){ .moon{ animation:none; } }
+</style>
 </head>
 <body>
 
@@ -489,70 +513,70 @@
 
   <div class="work-mosaic" id="mosaic">
 
-    <figure class="piece piece--sticker" style="--x:6.96; --y:0.77; --w:10.96;">
+    <figure class="piece piece--sticker" style="--x:5.43; --y:2.11; --w:10.96;">
       <img loading="lazy" decoding="async" src="pink copy.png" alt="Sticker reading almost cried" draggable="false">
       <span class="tag" style="--tx:95; --ty:-17.4;">stickers</span>
     </figure>
-    <figure class="piece piece--sticker" style="--x:17.65; --y:6.17; --w:10.55;">
+    <figure class="piece piece--sticker" style="--x:16.79; --y:10.78; --w:10.55;">
       <img loading="lazy" decoding="async" src="orange_ copy.png" alt="Sticker reading plot twist" draggable="false">
     </figure>
-    <figure class="piece piece--sticker" style="--x:13.07; --y:18.79; --w:11.77;">
+    <figure class="piece piece--sticker" style="--x:5.86; --y:20.66; --w:11.77;">
       <img loading="lazy" decoding="async" src="green copy.png" alt="Sticker reading mirror to my ego" draggable="false">
     </figure>
 
-    <figure class="piece" style="--x:31.82; --y:4.15; --w:16.64;">
+    <figure class="piece" style="--x:31.29; --y:5.51; --w:16.64;">
       <img loading="lazy" decoding="async" src="EMO_Data_-_SELECTED copy.png" alt="Film emotional feedback sheet template" draggable="false">
       <span class="tag tag--center tag--small" style="--tx:0; --ty:-11.7;">film emo-feedback sheets</span>
     </figure>
 
-    <figure class="piece piece--ad" style="--x:51.0; --y:4.8; --w:21.43;">
+    <figure class="piece piece--ad" style="--x:52.50; --y:5.35; --w:21.43;">
       <img loading="lazy" decoding="async" src="FOODBANK_-_the_TEMPLATE copy.jpg" alt="My Semba film advertisement" draggable="false">
     </figure>
-    <figure class="piece piece--ad piece--front" style="--x:57.1; --y:22.84; --w:21.43;">
+    <figure class="piece piece--ad piece--front" style="--x:52.50; --y:23.58; --w:21.43;">
       <img loading="lazy" decoding="async" src="FOODBANK_-_the_TEMPLATE_2 copy.jpg" alt="Take Me Home film advertisement" draggable="false">
     </figure>
-    <figure class="piece" style="--x:75.58; --y:3.76; --w:18.75;">
+    <figure class="piece" style="--x:77.14; --y:1.30; --w:18.75;">
       <img loading="lazy" decoding="async" src="supermarket copy.jpg" alt="Advertisement displayed on a supermarket TV screen" draggable="false">
       <span class="tag tag--center" style="--tx:0; --ty:-8.6;">advertisements</span>
     </figure>
 
-    <figure class="piece" style="--x:7.55; --y:33.79; --w:20.17;">
+    <figure class="piece" style="--x:18.43; --y:68.15; --w:20.17;">
       <video src="meetup-point copy.mp4" poster="meetup-point-poster copy.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Meet-up point sign animation on the festival screen"></video>
       <span class="tag" style="--tx:36; --ty:106.4;">signs/animations</span>
     </figure>
-    <figure class="piece" style="--x:31.11; --y:35.63; --w:20.25;">
+    <figure class="piece" style="--x:35.79; --y:41.41; --w:20.25;">
       <img loading="lazy" decoding="async" src="paper copy.jpg" alt="Feedback sheet held in hand" draggable="false">
     </figure>
-    <figure class="piece piece--front" style="--x:45.19; --y:46.06; --w:21.63;">
+    <figure class="piece piece--front" style="--x:43.07; --y:60.61; --w:21.63;">
       <img loading="lazy" decoding="async" src="people copy.jpg" alt="Festival audience filling out feedback sheets" draggable="false">
     </figure>
-    <figure class="piece piece--floor" style="--x:69.92; --y:41.48; --w:17.21;">
+    <figure class="piece piece--floor" style="--x:55.86; --y:81.76; --w:17.21;">
       <img loading="lazy" decoding="async" src="badweatherfloorplan-updated__1___1_ copy.png" alt="Venue floor plan" draggable="false">
       <span class="tag" style="--tx:30; --ty:111.7;">floorplans</span>
     </figure>
 
-    <figure class="piece piece--embed" style="--x:88.3; --y:31.56; --w:11;">
+    <figure class="piece piece--embed" style="--x:84.93; --y:31.85; --w:11;">
       <div class="embed-frame"><iframe class="ig" src="https://www.instagram.com/p/Dew4ryWl39a/embed/" loading="lazy" allowtransparency="true" allowfullscreen scrolling="no" frameborder="0" title="Instagram post 1"></iframe></div>
       <div class="shield" data-href="https://www.instagram.com/p/Dew4ryWl39a/" aria-hidden="true"></div>
     </figure>
 
-    <figure class="piece piece--embed" style="--x:88.3; --y:63.52; --w:11;">
+    <figure class="piece piece--embed" style="--x:84.71; --y:60.94; --w:11;">
       <div class="embed-frame"><iframe class="ig" src="https://www.instagram.com/p/DehjwcrFwhs/embed/" loading="lazy" allowtransparency="true" allowfullscreen scrolling="no" frameborder="0" title="Instagram post 2"></iframe></div>
       <div class="shield" data-href="https://www.instagram.com/p/DehjwcrFwhs/" aria-hidden="true"></div>
     </figure>
 
 
-    <figure class="piece piece--embed" style="--x:50.6; --y:66.39; --w:11;">
+    <figure class="piece piece--embed" style="--x:17.29; --y:39.30; --w:11;">
       <div class="embed-frame"><iframe class="ig" src="https://www.instagram.com/p/DcgZfNlF_Tz/embed/" loading="lazy" allowtransparency="true" allowfullscreen scrolling="no" frameborder="0" title="Instagram post 4"></iframe></div>
       <div class="shield" data-href="https://www.instagram.com/p/DcgZfNlF_Tz/" aria-hidden="true"></div>
     </figure>
 
-    <figure class="piece piece--embed" style="--x:72.3; --y:65.57; --w:11;">
+    <figure class="piece piece--embed" style="--x:68.43; --y:42.78; --w:11;">
       <div class="embed-frame"><iframe class="ig" src="https://www.instagram.com/p/DcD0X2xtNzH/embed/" loading="lazy" allowtransparency="true" allowfullscreen scrolling="no" frameborder="0" title="Instagram post 5"></iframe></div>
       <div class="shield" data-href="https://www.instagram.com/p/DcD0X2xtNzH/" aria-hidden="true"></div>
     </figure>
 
-    <figure class="piece piece--embed" style="--x:12.3; --y:68.85; --w:11;">
+    <figure class="piece piece--embed" style="--x:4.36; --y:39.30; --w:11;">
       <div class="embed-frame"><iframe class="ig" src="https://www.instagram.com/p/DeKVHe0Io40/embed/" loading="lazy" allowtransparency="true" allowfullscreen scrolling="no" frameborder="0" title="Instagram post 6"></iframe></div>
       <div class="shield" data-href="https://www.instagram.com/p/DeKVHe0Io40/" aria-hidden="true"></div>
     </figure>
