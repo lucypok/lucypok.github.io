@@ -528,6 +528,14 @@
   .moon{ animation:moon-diag 18s cubic-bezier(.3,0,.5,1) -5s infinite alternate; }
   @media (prefers-reduced-motion: reduce){ .moon{ animation:none; } }
 </style>
+<style>
+  /* round 7: title back in the same spot as the other project pages (role line on top, title under it, centred),
+     and more room above "more work" on laptop */
+  .project-tag, .project-title{ display:block; }
+  @media (min-width:761px){
+    .more-work{ margin-top:150px; }
+  }
+</style>
 </head>
 <body>
 
