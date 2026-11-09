@@ -496,6 +496,15 @@
   }
   @media (prefers-reduced-motion: reduce){ .moon{ animation:none; } }
 </style>
+<style>
+  /* round 5: intro paragraph a touch lower, page shorter, moon travels the whole page (bottom-left -> top-right corner, next to "back") */
+  @media (min-width:761px){
+    .project-intro{ padding-top:14px; padding-bottom:4px; }   /* paragraph ~14px lower, collage stays put */
+    .hero-wrap{ margin-top:44px; }
+    .more-work{ margin-top:10px; margin-bottom:30px; }
+  }
+  .moon{ animation-duration:24s; }
+</style>
 </head>
 <body>
 
@@ -666,6 +675,18 @@
       function update(){ var left=document.documentElement.scrollHeight-(window.scrollY+window.innerHeight); b.classList.toggle('show', window.scrollY>200 && left<700); }
       addEventListener('scroll',update,{passive:true}); addEventListener('resize',update); update();
       b.addEventListener('click',function(){ scrollTo({top:0,behavior:'smooth'}); });
+    })();
+  </script>
+  <script>
+    // the moon climbs from its spot at the bottom of the page all the way up to the top-right corner (the "back" corner)
+    (function(){
+      var moon=document.querySelector('.moon'), hero=document.querySelector('.hero-wrap');
+      if(!moon||!hero) return;
+      function setRise(){
+        var top=hero.getBoundingClientRect().top+window.scrollY+moon.offsetTop;
+        moon.style.setProperty('--rise', Math.max(0,top)+'px');
+      }
+      setRise(); addEventListener('load',setRise); addEventListener('resize',setRise);
     })();
   </script>
 </body>
