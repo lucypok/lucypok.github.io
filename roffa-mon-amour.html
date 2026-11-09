@@ -623,6 +623,23 @@
   /* phone only: even more space above "more work" */
   @media (max-width:760px){ .more-work{ margin-top:90px; } }
 </style>
+<style>
+  /* phone only: numbered works stacked under each other again (no carousel), more space between instagram posts, designs sit a bit higher */
+  @media (max-width:760px){
+    .car-group--works .car{
+      flex-direction:column; align-items:stretch; gap:28px;
+      overflow:visible; scroll-snap-type:none; margin:0; padding:0;
+    }
+    .car-group--works .car > .piece,
+    .car-group--works .car > .car-slide{ flex:none; width:100%; }
+    .car-group--works .car-dots{ display:none; }
+
+    .car-group--ig .car{ gap:30px; }
+
+    .work-mosaic{ margin-top:14px; }
+    .piece--sticker{ margin-top:0; }
+  }
+</style>
 </head>
 <body>
 
