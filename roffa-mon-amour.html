@@ -448,53 +448,22 @@
   @media (min-width:1025px){ .project-intro{ max-width:820px; padding-bottom:40px; text-wrap:pretty; } }
 </style>
 <style>
-  /* ---------- Instagram posts & reels: a second draggable collage ---------- */
-  .posts-label{
-    position:relative; z-index:5;
-    text-align:center; margin:60px 0 24px;
-    font-weight:500; font-size:16px; letter-spacing:-0.02em;
-    color:var(--yellow-soft);
-  }
-  .work-mosaic.work-mosaic--posts{
-    display:flex; flex-wrap:wrap; justify-content:center; align-items:flex-start;
-    gap:36px 3%;
-    aspect-ratio:auto; container-type:normal;
-    width:calc(100% - 56px); max-width:1400px; margin-top:0; padding:0;
-  }
-  .work-mosaic--posts .piece{
-    position:relative; left:auto; top:auto;
-    width:min(100%, 380px); z-index:2;
-  }
-  .piece--embed iframe{
-    display:block; width:100%; aspect-ratio:1 / 1.5;   /* replaced by the real height once Instagram reports it */
-    border:0; border-radius:4px; background:#fff;
-  }
-  .piece--embed .grip{
-    display:none;
-    height:24px; line-height:24px; margin:0 0 -1px;
-    text-align:center; font-weight:700; font-size:11px; letter-spacing:0.14em; text-transform:uppercase;
-    color:#17150f; background:var(--yellow-bright); border-radius:4px 4px 0 0; user-select:none;
-  }
-  .piece.dragging iframe{ pointer-events:none; }
-  @media (min-width:1181px){
-    .work-mosaic--posts .piece{ width:28%; }
-    .work-mosaic--posts .piece:nth-child(3n+2){ margin-top:46px; }
-    .work-mosaic--posts .piece:nth-child(3n+3){ margin-top:16px; }
-  }
-  @media (min-width:761px) and (max-width:1180px){
-    .work-mosaic--posts .piece{ width:40%; }
-  }
-  @media (min-width:761px){ .posts-label{ margin-top:110px; font-size:18px; } }
-  @media (min-width:1025px) and (hover:hover){
-    .piece--embed .grip{ display:block; cursor:grab; }
-    .piece--embed.dragging .grip{ cursor:grabbing; }
-  }
-</style>
-<style>
   /* team photo removed: the moon gets its own space to swing through */
   .hero-wrap{ min-height:360px; margin-top:10px; }
   .hero-wrap .moon{ margin-top:calc(var(--moon) / -2); }
   @media (min-width:761px){ .hero-wrap{ min-height:440px; } }
+</style>
+<style>
+  /* ---------- Instagram posts: small, scattered between the designs ---------- */
+  @media (min-width:761px){ .work-mosaic{ aspect-ratio:1384 / 1220; } }   /* a little taller to make room */
+  .embed-frame{ position:relative; overflow:hidden; border-radius:4px; background:#fff; }
+  .piece--embed iframe{ display:block; width:326px; height:520px; border:0; transform-origin:0 0; }   /* Instagram's minimum width, scaled down to fit */
+  .shield{ display:none; position:absolute; inset:0; z-index:2; }
+  .piece.dragging iframe{ pointer-events:none; }
+  @media (min-width:1025px) and (hover:hover){
+    .shield{ display:block; }   /* lets the post be dragged like the rest; a plain click opens it on Instagram */
+  }
+  @media (max-width:760px){ .piece--embed{ width:min(100%, 340px); margin:0 auto; } }
 </style>
 </head>
 <body>
@@ -513,76 +482,78 @@
 
   <div class="work-mosaic" id="mosaic">
 
-    <figure class="piece piece--sticker" style="--x:6.96; --y:1.16; --w:10.96;">
+    <figure class="piece piece--sticker" style="--x:6.96; --y:0.77; --w:10.96;">
       <img loading="lazy" decoding="async" src="pink copy.png" alt="Sticker reading almost cried" draggable="false">
       <span class="tag" style="--tx:95; --ty:-17.4;">stickers</span>
     </figure>
-    <figure class="piece piece--sticker" style="--x:17.65; --y:9.24; --w:10.55;">
+    <figure class="piece piece--sticker" style="--x:17.65; --y:6.17; --w:10.55;">
       <img loading="lazy" decoding="async" src="orange_ copy.png" alt="Sticker reading plot twist" draggable="false">
     </figure>
-    <figure class="piece piece--sticker" style="--x:13.07; --y:28.14; --w:11.77;">
+    <figure class="piece piece--sticker" style="--x:13.07; --y:18.79; --w:11.77;">
       <img loading="lazy" decoding="async" src="green copy.png" alt="Sticker reading mirror to my ego" draggable="false">
     </figure>
 
-    <figure class="piece" style="--x:31.82; --y:6.21; --w:16.64;">
+    <figure class="piece" style="--x:31.82; --y:4.15; --w:16.64;">
       <img loading="lazy" decoding="async" src="EMO_Data_-_SELECTED copy.png" alt="Film emotional feedback sheet template" draggable="false">
       <span class="tag tag--center tag--small" style="--tx:0; --ty:-11.7;">film emo-feedback sheets</span>
     </figure>
 
-    <figure class="piece piece--ad" style="--x:51.0; --y:7.19; --w:21.43;">
+    <figure class="piece piece--ad" style="--x:51.0; --y:4.8; --w:21.43;">
       <img loading="lazy" decoding="async" src="FOODBANK_-_the_TEMPLATE copy.jpg" alt="My Semba film advertisement" draggable="false">
     </figure>
-    <figure class="piece piece--ad piece--front" style="--x:57.1; --y:34.22; --w:21.43;">
+    <figure class="piece piece--ad piece--front" style="--x:57.1; --y:22.84; --w:21.43;">
       <img loading="lazy" decoding="async" src="FOODBANK_-_the_TEMPLATE_2 copy.jpg" alt="Take Me Home film advertisement" draggable="false">
     </figure>
-    <figure class="piece" style="--x:75.58; --y:5.63; --w:18.75;">
+    <figure class="piece" style="--x:75.58; --y:3.76; --w:18.75;">
       <img loading="lazy" decoding="async" src="supermarket copy.jpg" alt="Advertisement displayed on a supermarket TV screen" draggable="false">
       <span class="tag tag--center" style="--tx:0; --ty:-8.6;">advertisements</span>
     </figure>
 
-    <figure class="piece" style="--x:7.55; --y:50.62; --w:20.17;">
+    <figure class="piece" style="--x:7.55; --y:33.79; --w:20.17;">
       <video src="meetup-point copy.mp4" poster="meetup-point-poster copy.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Meet-up point sign animation on the festival screen"></video>
       <span class="tag" style="--tx:36; --ty:106.4;">signs/animations</span>
     </figure>
-    <figure class="piece" style="--x:31.11; --y:53.38; --w:20.25;">
+    <figure class="piece" style="--x:31.11; --y:35.63; --w:20.25;">
       <img loading="lazy" decoding="async" src="paper copy.jpg" alt="Feedback sheet held in hand" draggable="false">
     </figure>
-    <figure class="piece piece--front" style="--x:45.19; --y:69.0; --w:21.63;">
+    <figure class="piece piece--front" style="--x:45.19; --y:46.06; --w:21.63;">
       <img loading="lazy" decoding="async" src="people copy.jpg" alt="Festival audience filling out feedback sheets" draggable="false">
     </figure>
-    <figure class="piece piece--floor" style="--x:69.92; --y:62.14; --w:17.21;">
+    <figure class="piece piece--floor" style="--x:69.92; --y:41.48; --w:17.21;">
       <img loading="lazy" decoding="async" src="badweatherfloorplan-updated__1___1_ copy.png" alt="Venue floor plan" draggable="false">
       <span class="tag" style="--tx:30; --ty:111.7;">floorplans</span>
     </figure>
 
-  </div>
+    <figure class="piece piece--embed" style="--x:88.3; --y:31.56; --w:11;">
+      <div class="embed-frame"><iframe class="ig" src="https://www.instagram.com/p/Dew4ryWl39a/embed/" loading="lazy" allowtransparency="true" allowfullscreen scrolling="no" frameborder="0" title="Instagram post 1"></iframe></div>
+      <div class="shield" data-href="https://www.instagram.com/p/Dew4ryWl39a/" aria-hidden="true"></div>
+    </figure>
 
-  <p class="posts-label">posts &amp; reels</p>
-  <div class="work-mosaic work-mosaic--posts" id="mosaic-posts">
-    <figure class="piece piece--embed">
-      <div class="grip" aria-hidden="true">drag</div>
-      <iframe class="ig" src="https://www.instagram.com/p/Dew4ryWl39a/embed/" loading="lazy" allowtransparency="true" allowfullscreen scrolling="no" frameborder="0" title="Instagram post 1"></iframe>
+    <figure class="piece piece--embed" style="--x:88.3; --y:63.52; --w:11;">
+      <div class="embed-frame"><iframe class="ig" src="https://www.instagram.com/p/DehjwcrFwhs/embed/" loading="lazy" allowtransparency="true" allowfullscreen scrolling="no" frameborder="0" title="Instagram post 2"></iframe></div>
+      <div class="shield" data-href="https://www.instagram.com/p/DehjwcrFwhs/" aria-hidden="true"></div>
     </figure>
-    <figure class="piece piece--embed">
-      <div class="grip" aria-hidden="true">drag</div>
-      <iframe class="ig" src="https://www.instagram.com/p/DehjwcrFwhs/embed/" loading="lazy" allowtransparency="true" allowfullscreen scrolling="no" frameborder="0" title="Instagram post 2"></iframe>
+
+    <figure class="piece piece--embed" style="--x:32.9; --y:52.46; --w:11;">
+      <div class="embed-frame"><iframe class="ig" src="https://www.instagram.com/p/Dc1SFv4jYtH/embed/" loading="lazy" allowtransparency="true" allowfullscreen scrolling="no" frameborder="0" title="Instagram post 3"></iframe></div>
+      <div class="shield" data-href="https://www.instagram.com/p/Dc1SFv4jYtH/" aria-hidden="true"></div>
     </figure>
-    <figure class="piece piece--embed">
-      <div class="grip" aria-hidden="true">drag</div>
-      <iframe class="ig" src="https://www.instagram.com/p/Dc1SFv4jYtH/embed/" loading="lazy" allowtransparency="true" allowfullscreen scrolling="no" frameborder="0" title="Instagram post 3"></iframe>
+
+    <figure class="piece piece--embed" style="--x:50.6; --y:66.39; --w:11;">
+      <div class="embed-frame"><iframe class="ig" src="https://www.instagram.com/p/DcgZfNlF_Tz/embed/" loading="lazy" allowtransparency="true" allowfullscreen scrolling="no" frameborder="0" title="Instagram post 4"></iframe></div>
+      <div class="shield" data-href="https://www.instagram.com/p/DcgZfNlF_Tz/" aria-hidden="true"></div>
     </figure>
-    <figure class="piece piece--embed">
-      <div class="grip" aria-hidden="true">drag</div>
-      <iframe class="ig" src="https://www.instagram.com/p/DcgZfNlF_Tz/embed/" loading="lazy" allowtransparency="true" allowfullscreen scrolling="no" frameborder="0" title="Instagram post 4"></iframe>
+
+    <figure class="piece piece--embed" style="--x:72.3; --y:65.57; --w:11;">
+      <div class="embed-frame"><iframe class="ig" src="https://www.instagram.com/p/DcD0X2xtNzH/embed/" loading="lazy" allowtransparency="true" allowfullscreen scrolling="no" frameborder="0" title="Instagram post 5"></iframe></div>
+      <div class="shield" data-href="https://www.instagram.com/p/DcD0X2xtNzH/" aria-hidden="true"></div>
     </figure>
-    <figure class="piece piece--embed">
-      <div class="grip" aria-hidden="true">drag</div>
-      <iframe class="ig" src="https://www.instagram.com/p/DcD0X2xtNzH/embed/" loading="lazy" allowtransparency="true" allowfullscreen scrolling="no" frameborder="0" title="Instagram post 5"></iframe>
+
+    <figure class="piece piece--embed" style="--x:12.3; --y:68.85; --w:11;">
+      <div class="embed-frame"><iframe class="ig" src="https://www.instagram.com/p/DeKVHe0Io40/embed/" loading="lazy" allowtransparency="true" allowfullscreen scrolling="no" frameborder="0" title="Instagram post 6"></iframe></div>
+      <div class="shield" data-href="https://www.instagram.com/p/DeKVHe0Io40/" aria-hidden="true"></div>
     </figure>
-    <figure class="piece piece--embed">
-      <div class="grip" aria-hidden="true">drag</div>
-      <iframe class="ig" src="https://www.instagram.com/p/DeKVHe0Io40/embed/" loading="lazy" allowtransparency="true" allowfullscreen scrolling="no" frameborder="0" title="Instagram post 6"></iframe>
-    </figure>
+
   </div>
 
   <div class="project-body">
@@ -624,6 +595,8 @@
         const end = e => {
           if (!dragging) return;
           dragging = false;
+          const sh = piece.querySelector('.shield');
+          if (sh && e.type === 'pointerup' && Math.hypot(e.clientX - sx, e.clientY - sy) < 5) window.open(sh.dataset.href, '_blank', 'noopener');
           ox += e.clientX - sx; oy += e.clientY - sy;
           piece.classList.remove('dragging');
         };
@@ -633,16 +606,31 @@
       // if the window becomes phone/tablet sized, snap everything back to its spot
       addEventListener('resize', () => { if (!canDrag()) pieces.forEach(p => p._reset()); });
     })();
-    // Instagram embeds tell the page how tall they are; use that so nothing is cut off
-    addEventListener('message', function(e){
-      if (typeof e.origin !== 'string' || e.origin.indexOf('instagram.com') === -1) return;
-      var d = e.data;
-      if (typeof d === 'string') { try { d = JSON.parse(d); } catch (_) { return; } }
-      if (!d || d.type !== 'MEASURE' || !d.details || !d.details.height) return;
-      document.querySelectorAll('iframe.ig').forEach(function(f){
-        if (f.contentWindow === e.source) f.style.height = d.details.height + 'px';
+    // Instagram embeds: shown small by scaling Instagram's 326px-wide frame down to the piece width
+    (function(){
+      var embeds = [].slice.call(document.querySelectorAll('.piece--embed'));
+      function fit(){
+        embeds.forEach(function(p){
+          var f = p.querySelector('iframe'), fr = p.querySelector('.embed-frame');
+          var h = f._h || 520, k = p.clientWidth / 326;
+          f.style.height = h + 'px';
+          f.style.transform = 'scale(' + k + ')';
+          fr.style.height = (h * k) + 'px';
+        });
+      }
+      fit(); addEventListener('resize', fit); addEventListener('load', fit);
+      // Instagram tells the page how tall each post is, so nothing gets cut off
+      addEventListener('message', function(e){
+        if (typeof e.origin !== 'string' || e.origin.indexOf('instagram.com') === -1) return;
+        var d = e.data;
+        if (typeof d === 'string') { try { d = JSON.parse(d); } catch (_) { return; } }
+        if (!d || d.type !== 'MEASURE' || !d.details || !d.details.height) return;
+        embeds.forEach(function(p){
+          var f = p.querySelector('iframe');
+          if (f.contentWindow === e.source) { f._h = d.details.height; fit(); }
+        });
       });
-    });
+    })();
   </script>
 
 
