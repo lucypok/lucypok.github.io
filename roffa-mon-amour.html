@@ -654,6 +654,22 @@
     .car-group--ig .car > .piece--embed{ flex-basis:66%; max-width:280px; }
   }
 </style>
+<style>
+  /* phone only: bigger gaps between the stacked works and between the instagram posts */
+  @media (max-width:760px){
+    .car-group--works .car{ gap:48px; }
+    .car-group--ig .car{ gap:64px; }
+  }
+</style>
+<style>
+  /* phone only: paper + people are two separate pictures again, all designs a bit smaller */
+  @media (max-width:760px){
+    .car-group--works .car > .piece{ width:78%; }
+    .car-group--works .car > .piece--paper,
+    .car-group--works .car > .piece--people{ order:2; }
+    .stk-group{ width:90%; margin-left:auto; margin-right:auto; }
+  }
+</style>
 </head>
 <body>
 
@@ -702,12 +718,12 @@
       <video src="meetup-point copy.mp4" poster="meetup-point-poster copy.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Meet-up point sign animation on the festival screen"></video>
       <span class="tag" style="--tx:36; --ty:106.4;">signs/animations</span>
     </figure>
-    <div class="car-slide"><figure class="piece" style="--x:35.79; --y:41.41; --w:20.25;">
+    <figure class="piece piece--paper" style="--x:35.79; --y:41.41; --w:20.25;">
       <img loading="lazy" decoding="async" src="paper copy.jpg" alt="Feedback sheet held in hand" draggable="false">
     </figure>
-    <figure class="piece piece--front" style="--x:43.07; --y:60.61; --w:21.63;">
+    <figure class="piece piece--front piece--people" style="--x:43.07; --y:60.61; --w:21.63;">
       <img loading="lazy" decoding="async" src="people copy.jpg" alt="Festival audience filling out feedback sheets" draggable="false">
-    </figure></div>
+    </figure>
     <figure class="piece piece--floor" style="--x:55.86; --y:81.76; --w:17.21;">
       <img loading="lazy" decoding="async" src="badweatherfloorplan-updated__1___1_ copy.png" alt="Venue floor plan" draggable="false">
       <span class="tag" style="--tx:30; --ty:111.7;">floorplans</span>
@@ -797,6 +813,13 @@
           f.style.transform = 'scale(' + k + ')';
           fr.style.height = (h * k) + 'px';
         });
+        // phone: every post in the carousel gets the same height (the tallest one, so nothing is cut off)
+        if (matchMedia('(max-width:760px)').matches) {
+          var vis = embeds.filter(function(p){ return p.clientWidth > 0; });
+          var maxH = 0;
+          vis.forEach(function(p){ maxH = Math.max(maxH, parseFloat(p.querySelector('.embed-frame').style.height) || 0); });
+          vis.forEach(function(p){ p.querySelector('.embed-frame').style.height = maxH + 'px'; });
+        }
       }
       fit(); addEventListener('resize', fit); addEventListener('load', fit);
       // Instagram tells the page how tall each post is, so nothing gets cut off
