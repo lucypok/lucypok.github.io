@@ -640,6 +640,20 @@
     .piece--sticker{ margin-top:0; }
   }
 </style>
+<style>
+  /* phone only: paper + people separate again, works a bit smaller (more space at the sides), instagram posts with more air */
+  @media (max-width:760px){
+    .car-group--works .car{ align-items:center; }
+    .car-group--works .car > .car-slide{ display:contents; }
+    .car-group--works .car > .piece,
+    .car-group--works .car-slide > .piece{ flex:none; width:86%; margin:0; }
+    .car-group--works .car-slide > .piece{ order:2; }
+
+    .car-group--ig{ margin-top:26px; }
+    .car-group--ig .car{ gap:48px; padding:0 36px; scroll-padding:0 36px; }
+    .car-group--ig .car > .piece--embed{ flex-basis:66%; max-width:280px; }
+  }
+</style>
 </head>
 <body>
 
