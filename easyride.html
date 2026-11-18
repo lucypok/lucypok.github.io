@@ -385,6 +385,9 @@
     .top-band{ display:flex; flex-direction:column; min-height:100vh; min-height:100svh; }
     .hero-visual-section{ flex:1 1 auto; display:flex; flex-direction:column; }
     .hero-scene{ flex:1 1 auto; height:auto; min-height:320px; }
+    .hero-bike{ height:clamp(310px, 47vh, 450px); }              /* bigger bike on phone */
+    .top-band::before{ background-size:310% auto; }              /* bigger road on phone */
+    .project-subtitle{ max-width:235px; margin-left:auto; margin-right:auto; }   /* the question sits in a narrower paragraph on phone */
   }
   /* a bit more contrast / punch so the hero is less pale */
   .top-band::before{ filter:contrast(1.08) saturate(1.04); }
