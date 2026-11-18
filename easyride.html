@@ -372,9 +372,14 @@
     .hero-toy-wrap.rabbit{ width:13%; left:22%; }   /* rabbit a bit smaller */
     .hero-toy-wrap.dildo{ width:10%; right:31%; }   /* other toy a bit smaller */
     section.reveal{ padding-top:20px; }              /* intro text sits closer to the road */
-    .deck-grid{ margin-top:64px; }                   /* space between the intro text and the slides (grows as the text rises on scroll) */
+    .deck-grid{ margin-top:38px; }                   /* space between the intro text and the slides (grows as the text rises on scroll) */
     .project-subtitle{ padding-top:7px; }            /* "What do road cycling and EasyToys..." a tiny bit lower */
     .deck-cap{ display:block; }                      /* little notes under each slide are back */
+    /* the road always ends (softly) above the intro text, so the two never overlap; the end point follows the text as it rises (set by script) */
+    .top-band::before{
+      -webkit-mask-image:linear-gradient(to bottom, #000 0, #000 calc(100% - var(--road-end, 0px) - var(--road-soft, 0px)), transparent calc(100% - var(--road-end, 0px)));
+      mask-image:linear-gradient(to bottom, #000 0, #000 calc(100% - var(--road-end, 0px) - var(--road-soft, 0px)), transparent calc(100% - var(--road-end, 0px)));
+    }
     /* slides only turn grey while one of them is actually hovered (not when the cursor is in the white space between them) */
     .deck-grid:hover .deck-grid-item:not(:hover) img{ filter:none; }
     .deck-grid:has(.deck-grid-item:hover) .deck-grid-item:not(:hover) img{ filter:saturate(0.45) brightness(0.92) opacity(0.7); }
@@ -597,11 +602,12 @@
     (function(){
       var band=document.querySelector('.top-band');
       if(!band) return;
-      var START=0.8, END=0.1, ticking=false;   // fade starts when the bottom of the road is at 80% of the screen height, done at 10%
+      var START=0.8, END=0.1, ticking=false, wide=window.matchMedia('(min-width:761px)');   // fade starts when the bottom of the road is at 80% of the screen height, done at 10%
       function update(){
         ticking=false;
         var bottom=band.getBoundingClientRect().bottom/window.innerHeight;
-        var o=Math.min(Math.max((bottom-END)/(START-END),0),1);
+        var st=wide.matches?0.9:START, en=wide.matches?0.45:END;   // laptop: road is fully gone earlier, before it reaches the text
+        var o=Math.min(Math.max((bottom-en)/(st-en),0),1);
         band.style.setProperty('--road-o', o.toFixed(3));
       }
       function onScroll(){ if(!ticking){ ticking=true; requestAnimationFrame(update); } }
@@ -613,18 +619,19 @@
   <script>
     // laptop only: the intro text starts rising as the bike rises and the road fades, which opens up space above the slides
     (function(){
-      var scene=document.querySelector('.hero-scene'), txt=document.querySelector('section.reveal');
+      var scene=document.querySelector('.hero-scene'), txt=document.querySelector('section.reveal'), band=document.querySelector('.top-band');
       if(!scene||!txt) return;
       if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       var desktop=window.matchMedia('(min-width:761px)');
       var MAX_RISE=60, ticking=false;
       function update(){
         ticking=false;
-        if(!desktop.matches){ txt.style.transform=''; return; }
+        if(!desktop.matches){ txt.style.transform=''; if(band){ band.style.removeProperty('--road-end'); band.style.removeProperty('--road-soft'); } return; }
         var rect=scene.getBoundingClientRect();
         var p=(window.innerHeight*0.45-rect.top)/rect.height;
         p=Math.min(Math.max(p,0),1);
         txt.style.transform='translateY('+(-p*MAX_RISE).toFixed(1)+'px)';
+        if(band){ var rise=p*MAX_RISE; band.style.setProperty('--road-end',(rise*1.2).toFixed(1)+'px'); band.style.setProperty('--road-soft',Math.min(rise,60).toFixed(1)+'px'); }
       }
       function onScroll(){ if(!ticking){ ticking=true; requestAnimationFrame(update); } }
       addEventListener('scroll',onScroll,{passive:true});
