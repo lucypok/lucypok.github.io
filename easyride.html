@@ -287,6 +287,61 @@
     body.lb-lock{ overflow:hidden; }
   }
 </style>
+<style>
+  /* v2: question subtitle, reveal text, captioned 2x2 slides */
+  .project-subtitle{ font-size:clamp(17px, 2vw, 22px); margin:0 0 22px; }
+  .reveal{ max-width:1060px; margin:0 auto; padding:100px 28px 6px; text-align:center; font-size:17px; line-height:1.6; font-weight:500; letter-spacing:-0.01em; }
+  .reveal span{ display:block; transform:scaleX(1.10); transform-origin:center; }
+  .reveal p:first-child span:first-child{ font-weight:600; }
+  .reveal p{ margin:0 0 22px; }
+  .deck-hint{ text-align:center; font-size:15px; margin:26px 0 72px; color:var(--ink); }
+  .hint-m{ display:none; }
+  .deck-grid-item{ background:none; box-shadow:none; border:0; display:flex; flex-direction:column; gap:14px; cursor:pointer; transition:none; }
+  .deck-grid-item img{ box-shadow:0 3px 9px -6px rgba(111,30,68,0.2); transition:transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease; }
+  .deck-cap{ margin:0; text-align:center; font-size:14px; line-height:1.4; color:var(--pink-deep); }
+  .credit{ text-align:center; font-size:14px; font-weight:500; color:var(--pink); margin:90px 0 0; }
+  .credit b{ font-weight:700; }
+  @media (min-width:761px){
+    .deck-grid{ grid-template-columns:repeat(2, 1fr); max-width:1440px; gap:64px 38px; }
+    .deck-grid-section{ padding-bottom:0; }
+    .more-work{ margin-top:14px; padding-top:0; }
+    .deck-grid-item:hover{ transform:none; box-shadow:none; }
+    .deck-grid-item:hover img{ transform:scale(1.04); box-shadow:0 26px 34px -14px rgba(111,30,68,0.42); }
+  }
+  @media (max-width:760px){
+    .reveal{ font-size:15px; padding:28px 34px 0; }
+    .reveal span{ transform:scaleX(1.06); }
+    .reveal p:first-child span + span{ margin-top:10px; }
+    .hint-d{ display:none; } .hint-m{ display:inline; }
+    .deck-hint{ font-size:12px; margin:18px 24px 28px; }
+    .deck-grid-item{ border:0; box-sizing:border-box; }
+    .deck-cap{ padding:0 24px; }
+    .credit{ margin:84px 0 0; }
+    .deck-grid-section{ padding-bottom:0; }
+    .more-work{ margin-top:30px; }
+  }
+</style>
+<style>
+  /* review tweaks */
+  @media (min-width:761px){
+    .reveal p:first-child span:first-child{ font-weight:500; }   /* "But first," no extra weight on laptop */
+    .deck-grid-section{ padding-top:0; }                         /* "(tap to make bigger)" closer to the text above */
+    .deck-hint{ margin-top:14px; }
+    .credit{ margin-bottom:56px; }                               /* more space above "more work" */
+  }
+  .credit, .credit b{ color:var(--ink); }                        /* black on both devices */
+  @media (max-width:760px){
+    .credit{ margin-bottom:40px; }
+  }
+</style>
+<style>
+  /* review round 2 */
+  .title-link{ color:inherit; text-decoration:none; transition:color 0.2s ease; }
+  .title-link:hover{ color:var(--pink); }
+  .project-subtitle{ font-size:clamp(16px, 1.8vw, 20px); }
+  @media (min-width:761px){ .credit{ margin-bottom:24px; } }
+  @media (max-width:760px){ .credit{ margin-bottom:18px; } }
+</style>
 </head>
 <body>
 
@@ -300,15 +355,12 @@
 
     <header class="project-header">
     <p class="project-tag">strategy + concept + design</p>
-    <h1 class="project-title">EasyRide — EasyToys x Young Dogs</h1>
+    <h1 class="project-title">EasyRide — <a class="title-link" href="https://www.easytoys.nl" target="_blank" rel="noopener">EasyToys</a> x <a class="title-link" href="https://jongehonden.nl/pitches/easytoys" target="_blank" rel="noopener">Young Dogs</a></h1>
+    <p class="project-subtitle">What do road cycling and EasyToys have in common?</p>
   </header>
   </div>
 
-  <p class="intro-lead">
-    <span>Road cyclists don't need the lightest wheels or the best saddle. They never strictly did.</span>
-    <span>But once they've upgraded, they can't imagine going back.</span>
-    <span><a class="brand-link" href="https://www.easytoys.nl/" target="_blank" rel="noopener">EasyToys</a> has been hearing the same thing about pleasure for the past 20 years.</span>
-  </p>
+  
 
   <div class="hero-visual-section">
     <div class="hero-scene">
@@ -322,48 +374,21 @@
   </div>
   </div>
 
-  <div class="deck-grid-section">
-    <p class="deck-grid-label">the campaign</p>
-    <p class="deck-subtitle">EasyRide, improving rides since 2007</p>
-    <p class="deck-rotate-hint">(for a better read, turn the phone)</p>
-    <div class="deck-grid" id="deckGrid">
-      <div class="deck-grid-item"><img loading="lazy" decoding="async" src="2 copy.png" alt="Insight slide: 'You don't need it. Until you do.'"></div>
-      <div class="deck-grid-item"><img loading="lazy" decoding="async" src="3 copy.png" alt="Target audience slide: the perfect fit, 20s, 50s and women riders"></div>
-      <div class="deck-grid-item"><img loading="lazy" decoding="async" src="4 (2) copy.png" alt="Execution 1, Dutch copy posters: Even remmen, Gepompt tot de juiste spanning, Kom op je eigen cadans"></div>
-      <div class="deck-grid-item"><img loading="lazy" decoding="async" src="20 copy.png" alt="Execution 2: EasyRide personal lubricant seeded in Dutch road cycling shops"></div>
-      <div class="deck-grid-item"><img loading="lazy" decoding="async" src="21 copy.png" alt="Execution 3: Stay on track, seeded Strava activity notes"></div>
-      <div class="deck-grid-item"><img loading="lazy" decoding="async" src="22 copy.png" alt="Closing slide: road cyclists spend freely on what makes the ride better, your pleasure deserves the same"></div>
-    </div>
-    <div class="deck-dots" id="deckDots"></div>
-  </div>
-
-  <section class="how-section">
-    <div class="how-inner">
-      <div class="how-copy">
-        <p>Together with <b>Liesbeth</b>, we joined <a href="https://jongehonden.nl/" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline; text-underline-offset:3px;">Jonge Honden/Young Dogs</a>’ last pitch of 2026 for EasyToys.</p>
-        <p>EasyToys, one of Europe’s largest sexual wellness platforms, was turning 20. Instead of a birthday campaign with balloons, they wanted to get people talking, while navigating bans and restrictions.</p>
-        <p>Based in the Netherlands, they had one obvious place to start: the bicycle. But cycling is so Dutch that everyone does it, even children. And they needed something strictly for adults.</p>
-        <p>That’s where road cycling came in, an obsessive subculture with its own rituals, vocabulary and a surprising amount in common with pleasure.</p>
-        <p>The result? A <span class="hl">poster campaign</span>, a <span class="hl">bike lube</span> made for a different kind of ride, and a trail of reviews hidden in plain sight on <span class="hl">Strava</span>.</p>
-      </div>
-    </div>
+  <section class="reveal">
+    <p><span>But first, how do you celebrate a brand’s birthday when you can’t show or name its products?</span><span>You tap into a subculture that already speaks the same language: <b class="hl">road cycling.</b></span></p>
+    <p><span>Road cyclists have their own rituals, their own vocabulary, and an obsession with improving the ride.</span><span>Nobody settles for second-best. Your pleasure deserves the same.</span></p>
   </section>
 
-  <div class="carousel-banner">
-    <div class="carousel-track">
-      <img loading="lazy" decoding="async" src="1apng copy.png" alt="Poster: Get into position, bike handlebars">
-      <img loading="lazy" decoding="async" src="2a copy.png" alt="Poster: Gepompt tot de juiste spanning, close-up of bike tyre">
-      <img loading="lazy" decoding="async" src="3a copy.png" alt="Poster: Even remmen, close-up of bike brake levers">
-      <img loading="lazy" decoding="async" src="4a copy.png" alt="Poster: Get into position, bike handlebars alternate crop">
-      <img loading="lazy" decoding="async" src="5apng copy.png" alt="Poster: Pumped up to the right tension, close-up of bike tyre">
-      <img loading="lazy" decoding="async" src="6a copy.png" alt="Poster: Kom op je eigen cadans, bike handlebars in motion">
-      <img loading="lazy" decoding="async" src="1apng copy.png" alt="Poster: Get into position, bike handlebars">
-      <img loading="lazy" decoding="async" src="2a copy.png" alt="Poster: Gepompt tot de juiste spanning, close-up of bike tyre">
-      <img loading="lazy" decoding="async" src="3a copy.png" alt="Poster: Even remmen, close-up of bike brake levers">
-      <img loading="lazy" decoding="async" src="4a copy.png" alt="Poster: Get into position, bike handlebars alternate crop">
-      <img loading="lazy" decoding="async" src="5apng copy.png" alt="Poster: Pumped up to the right tension, close-up of bike tyre">
-      <img loading="lazy" decoding="async" src="6a copy.png" alt="Poster: Kom op je eigen cadans, bike handlebars in motion">
+  <div class="deck-grid-section">
+    <p class="deck-hint"><span class="hint-d">(tap to make bigger)</span><span class="hint-m">(swipe through the slides; turn the phone for a better read)</span></p>
+    <div class="deck-grid" id="deckGrid">
+      <div class="deck-grid-item"><img loading="lazy" decoding="async" src="slide-insight.png" alt="Insight slide: You don’t need it. Until you do. Real Reddit threads from cyclists and from people talking about vibrators."><p class="deck-cap">The insight: Nobody <em>needs</em> the upgrade but nobody wants to go back.</p></div>
+      <div class="deck-grid-item"><img loading="lazy" decoding="async" src="slide-audience.png" alt="Target audience slide: the perfect fit, 20s, 50s and women riders"><p class="deck-cap">Dutch audience, that already spends on feeling better: 20s, 50s, and women</p></div>
+      <div class="deck-grid-item"><img loading="lazy" decoding="async" src="slide-posters.png" alt="Execution 1: three EasyToys posters, Get into position, Take a break, The right tension, for a different kind of ride"><p class="deck-cap">Poster series placed along bike paths</p></div>
+      <div class="deck-grid-item"><img loading="lazy" decoding="async" src="slide-lube.png" alt="Execution 2: EasyRide personal lubricant placed in Dutch bike shops, with reactions"><p class="deck-cap">A 20th-anniversary lube, placed in bike shops</p></div>
     </div>
+    <div class="deck-dots" id="deckDots"></div>
+    <p class="credit">Project made with <b>Liesbeth</b></p>
   </div>
 
   <a class="more-work" href="index.html">
