@@ -372,23 +372,23 @@
     .hero-toy-wrap.rabbit{ width:13%; left:22%; }   /* rabbit a bit smaller */
     .hero-toy-wrap.dildo{ width:10%; right:31%; }   /* other toy a bit smaller */
     section.reveal{ padding-top:20px; }              /* intro text sits closer to the road */
-    .deck-grid{ margin-top:76px; }                   /* space between the intro text and the slides (text and slides now rise together) */
-    .project-subtitle{ padding-top:7px; }            /* "What do road cycling and EasyToys..." a tiny bit lower */
+    .deck-grid{ margin-top:56px; }                   /* space between the intro text and the slides (text and slides now rise together) */
+    .project-subtitle{ padding-top:7px; font-size:clamp(18px, 2vw, 22px); }            /* "What do road cycling and EasyToys..." a tiny bit lower */
     .deck-cap{ display:block; }                      /* little notes under each slide are back */
-    /* the road dissolves slowly (long, eased fade) before it reaches the intro text, so the two never overlap and there is no hard edge; values are set by script */
-    .top-band::before{
-      -webkit-mask-image:linear-gradient(to bottom, #000 0, #000 calc(100% - var(--road-end, 0px) - var(--road-soft, 0px)), rgba(0,0,0,0.9) calc(100% - var(--road-end, 0px) - var(--road-soft, 0px) * 0.8), rgba(0,0,0,0.65) calc(100% - var(--road-end, 0px) - var(--road-soft, 0px) * 0.6), rgba(0,0,0,0.35) calc(100% - var(--road-end, 0px) - var(--road-soft, 0px) * 0.4), rgba(0,0,0,0.1) calc(100% - var(--road-end, 0px) - var(--road-soft, 0px) * 0.2), transparent calc(100% - var(--road-end, 0px)));
-      mask-image:linear-gradient(to bottom, #000 0, #000 calc(100% - var(--road-end, 0px) - var(--road-soft, 0px)), rgba(0,0,0,0.9) calc(100% - var(--road-end, 0px) - var(--road-soft, 0px) * 0.8), rgba(0,0,0,0.65) calc(100% - var(--road-end, 0px) - var(--road-soft, 0px) * 0.6), rgba(0,0,0,0.35) calc(100% - var(--road-end, 0px) - var(--road-soft, 0px) * 0.4), rgba(0,0,0,0.1) calc(100% - var(--road-end, 0px) - var(--road-soft, 0px) * 0.2), transparent calc(100% - var(--road-end, 0px)));
-    }
     /* slides only turn grey while one of them is actually hovered (not when the cursor is in the white space between them) */
     .deck-grid:hover .deck-grid-item:not(:hover) img{ filter:none; }
     .deck-grid:has(.deck-grid-item:hover) .deck-grid-item:not(:hover) img{ filter:saturate(0.45) brightness(0.92) opacity(0.7); }
     .deck-grid{ max-width:clamp(760px, calc((100vh - 250px) * 1.7778 + 64px), 1440px); }   /* slightly smaller slides so the notes fit */
   }
+  /* phone: the road + bike fill the whole first screen, no strip of plain page at the bottom */
+  @media (max-width:760px){
+    .top-band{ display:flex; flex-direction:column; min-height:100vh; min-height:100svh; }
+    .hero-visual-section{ flex:1 1 auto; display:flex; flex-direction:column; }
+    .hero-scene{ flex:1 1 auto; height:auto; min-height:320px; }
+  }
   /* a bit more contrast / punch so the hero is less pale */
   .top-band::before{ filter:contrast(1.08) saturate(1.04); }
   .hero-bike{ filter:drop-shadow(0 20px 30px rgba(23,21,15,0.3)) contrast(1.08) saturate(1.04); }
-  .hero-toy{ filter:contrast(1.08) saturate(1.04); }
 </style>
 </head>
 <body>
@@ -424,7 +424,7 @@
 
   <div class="post-hero" id="postHero">
   <section class="reveal">
-    <p><span>But first, how do you celebrate a brand’s birthday when you can’t show or name its products?</span><span>You tap into a subculture that already speaks the same language: <b class="hl">road cycling.</b></span></p>
+    <p><span>But first: how do you celebrate a brand’s birthday when you can’t show or name its products?</span><span>You tap into a subculture that already speaks the same language: <b class="hl">road cycling.</b></span></p>
     <p><span>Road cyclists have their own rituals, their own vocabulary, and an obsession with improving the ride.</span><span>Nobody settles for second-best. Your pleasure deserves the same.</span></p>
   </section>
 
@@ -600,30 +600,18 @@
     })();
   </script>
   <script>
-    // the road fades out as you scroll past it; on laptop the intro text + slides then rise together (even after the bike is out of sight)
+    // the road background fades out as you scroll past it (laptop: slow, gentle fade)
     (function(){
-      var band=document.querySelector('.top-band'), post=document.getElementById('postHero');
+      var band=document.querySelector('.top-band');
       if(!band) return;
       var wide=window.matchMedia('(min-width:761px)');
-      var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var MAX_RISE=120, ticking=false;
-      function clamp(v,a,b){ return Math.min(Math.max(v,a),b); }
+      var ticking=false, last=-1;
       function update(){
         ticking=false;
-        var V=window.innerHeight, bottomPx=band.getBoundingClientRect().bottom, bottom=bottomPx/V;
-        if(wide.matches){
-          var o=clamp((bottom+0.25)/(0.9+0.25),0,1);            // laptop: slow fade, still faintly visible at the top while the text is on screen
-          band.style.setProperty('--road-o', o.toFixed(3));
-          var rise=reduce?0:clamp((0.45*V-bottomPx)*0.35,0,MAX_RISE);   // content starts rising once the bike is out of sight
-          band.style.setProperty('--road-end', rise.toFixed(1)+'px');   // road always ends above the text
-          band.style.setProperty('--road-soft', (90*(1-o)).toFixed(1)+'px');   // long soft end that grows as the road fades
-          if(post){ post.style.transform=rise?'translateY('+(-rise).toFixed(1)+'px)':''; post.style.marginBottom=reduce?'':(-MAX_RISE)+'px'; }
-        }else{
-          var op=clamp((bottom-0.1)/(0.8-0.1),0,1);            // phone: unchanged
-          band.style.setProperty('--road-o', op.toFixed(3));
-          band.style.removeProperty('--road-end'); band.style.removeProperty('--road-soft');
-          if(post){ post.style.transform=''; post.style.marginBottom=''; }
-        }
+        if(!wide.matches){ if(last!==0){ last=0; band.style.opacity=''; } return; }
+        var b=band.getBoundingClientRect().bottom/window.innerHeight;
+        var o=Math.round(Math.min(Math.max((b+0.25)/1.15,0),1)*100)/100;
+        if(o!==last){ last=o; band.style.opacity=o; }
       }
       function onScroll(){ if(!ticking){ ticking=true; requestAnimationFrame(update); } }
       addEventListener('scroll',onScroll,{passive:true});
