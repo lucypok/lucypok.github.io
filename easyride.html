@@ -356,6 +356,8 @@
   .deck-hint{ display:none; }   /* no slide hints on any device */
   @media (min-width:761px){ .deck-grid{ margin-top:56px; } }
   @media (max-width:760px){ .deck-grid{ margin-top:12px; } }
+  /* laptop: size the slide grid so all four slides + captions fit on one screen */
+  @media (min-width:761px){ .deck-grid{ max-width:clamp(760px, calc((100vh - 270px) * 1.7778), 1440px); } }
   .hero-visual-section{ padding-top:105px; }
   @media (max-width:760px){ .hero-visual-section{ padding-top:110px; } }
 </style>
