@@ -372,8 +372,8 @@
     .hero-toy-wrap.rabbit{ width:13%; left:22%; }   /* rabbit a bit smaller */
     .hero-toy-wrap.dildo{ width:10%; right:31%; }   /* other toy a bit smaller */
     section.reveal{ padding-top:20px; }              /* intro text sits closer to the road */
-    .deck-grid{ margin-top:56px; }                   /* space between the intro text and the slides (text and slides now rise together) */
-    .project-subtitle{ padding-top:7px; font-size:clamp(18px, 2vw, 22px); }            /* "What do road cycling and EasyToys..." a tiny bit lower */
+    .deck-grid{ margin-top:56px; row-gap:46px; }     /* space between the intro text and the slides; bottom two slides a little higher */
+    .project-subtitle{ padding-top:3px; font-size:clamp(17px, 1.9vw, 21px); }            /* "What do road cycling and EasyToys..." a tiny bit lower */
     .deck-cap{ display:block; }                      /* little notes under each slide are back */
     /* slides only turn grey while one of them is actually hovered (not when the cursor is in the white space between them) */
     .deck-grid:hover .deck-grid-item:not(:hover) img{ filter:none; }
@@ -610,7 +610,7 @@
         ticking=false;
         if(!wide.matches){ if(last!==0){ last=0; band.style.opacity=''; } return; }
         var b=band.getBoundingClientRect().bottom/window.innerHeight;
-        var o=Math.round(Math.min(Math.max((b-0.35)/0.55,0),1)*100)/100;
+        var o=Math.round(Math.min(Math.max((b-0.2)/0.7,0),1)*100)/100;
         if(o!==last){ last=o; band.style.opacity=o; }
       }
       function onScroll(){ if(!ticking){ ticking=true; requestAnimationFrame(update); } }
