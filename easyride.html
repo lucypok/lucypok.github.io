@@ -393,6 +393,30 @@
   .top-band::before{ filter:contrast(1.08) saturate(1.04); }
   .hero-bike{ filter:drop-shadow(0 20px 30px rgba(23,21,15,0.3)) contrast(1.08) saturate(1.04); }
 </style>
+<style>
+  /* phone only: caption sits above each slide, so the dots sit right under the slide and nothing gets in their way */
+  @media (max-width:760px){
+    .deck-grid-item{ flex-direction:column-reverse; gap:10px; }
+    .deck-cap{ padding:0 24px; font-size:13px; }
+    .deck-dots{ padding-top:14px; padding-bottom:6px; }
+    .deck-grid-section{ padding-bottom:12px; }
+    .more-work{ margin-top:22px; }
+  }
+  @media (min-width:761px){ .more-work{ margin-top:90px; } }   /* laptop: keeps the space the credit line used to give */
+  /* phone only: toys bigger and higher so they read clearly above the handlebars */
+  @media (max-width:760px){
+    .hero-toy-wrap{ z-index:3; }
+    .hero-toy-wrap.wand-a{ width:19%; left:12%; top:-2%; }
+    .hero-toy-wrap.dildo{ width:25%; right:7%; top:7%; }
+    .hero-toy-wrap.rabbit{ width:30%; left:2%; top:52%; }
+  }
+  /* phone only: the question under the title, slightly bigger */
+  @media (max-width:760px){
+    .project-subtitle{ font-size:15px; max-width:none; margin-left:-18px; margin-right:-18px; white-space:nowrap; margin-top:-5px; }
+  }
+  .m-br{ display:none; }
+  @media (max-width:760px){ .m-br{ display:inline; } }   /* phone: "...EasyToys" on line one, "have in common?" on line two */
+</style>
 </head>
 <body>
 
@@ -407,7 +431,7 @@
     <header class="project-header">
     <p class="project-tag">strategy + concept + design</p>
     <h1 class="project-title">EasyRide — <a class="title-link" href="https://www.easytoys.nl" target="_blank" rel="noopener">EasyToys</a> x <a class="title-link" href="https://jongehonden.nl/pitches/easytoys" target="_blank" rel="noopener">Young Dogs</a></h1>
-    <p class="project-subtitle">What do road cycling and <a class="pink-word" href="https://www.easytoys.nl" target="_blank" rel="noopener">EasyToys</a> have in common?</p>
+    <p class="project-subtitle">What do road cycling and <a class="pink-word" href="https://www.easytoys.nl" target="_blank" rel="noopener">EasyToys</a><br class="m-br"> have in common?</p>
   </header>
   </div>
 
@@ -440,7 +464,6 @@
       <div class="deck-grid-item"><img loading="lazy" decoding="async" src="slide-lube.png" alt="Execution 2: EasyRide personal lubricant placed in Dutch bike shops, with reactions"><p class="deck-cap">A 20th-anniversary lube, placed in bike shops</p></div>
     </div>
     <div class="deck-dots" id="deckDots"></div>
-    <p class="credit">Project made with <b>Liesbeth</b></p>
   </div>
 
   <a class="more-work" href="index.html">
