@@ -430,6 +430,31 @@
   @media (min-width:761px) and (hover:hover) and (pointer:fine){ html.cc, html.cc *{ cursor:none !important; } html.cc #cc{ display:block; } }
   /* laptop only: the question under the title, a tiny bit smaller */
   @media (min-width:761px){ .project-subtitle{ font-size:clamp(16px, 1.75vw, 19.5px); } }
+  /* phone only: tap a slide to see it full-screen, turned sideways, with an X to leave */
+  .lbm{ display:none; }
+  @media (max-width:760px){
+    .lbm{ display:block; position:fixed; inset:0; z-index:2000; background:rgba(23,21,15,0.96); opacity:0; pointer-events:none; transition:opacity 0.25s ease; }
+    .lbm.open{ opacity:1; pointer-events:auto; }
+    .lbm-img{ position:absolute; left:50%; top:50%; width:min(calc(100svh - 110px), calc((100vw - 24px) * 16 / 9)); height:auto; transform:translate(-50%,-50%) rotate(90deg); border:1.5px solid #f6bdd7; background:#fff; }
+    .lbm-close{ position:absolute; top:calc(env(safe-area-inset-top, 0px) + 14px); right:14px; width:46px; height:46px; border-radius:50%; border:0; background:#fff; color:var(--pink); display:flex; align-items:center; justify-content:center; padding:0; cursor:pointer; -webkit-tap-highlight-color:transparent; z-index:2; }
+    .lbm-close svg{ width:22px; height:22px; display:block; }
+    body.lbm-lock{ overflow:hidden; }
+    .lbm-img{ transition:opacity 0.14s ease; }
+    .lbm-img.swap{ opacity:0; }
+    .lbm-count{ position:absolute; left:0; right:0; bottom:calc(env(safe-area-inset-bottom, 0px) + 16px); text-align:center; color:rgba(255,255,255,0.75); font-size:13px; letter-spacing:0.08em; pointer-events:none; }
+  }
+  @media (max-width:760px) and (orientation:landscape){
+    .lbm-img{ transform:translate(-50%,-50%); width:min(calc((100svh - 24px) * 16 / 9), calc(100vw - 90px)); }
+  }
+  .reveal p.tap-hint{ display:none; }
+  @media (max-width:760px){
+    .reveal p.tap-hint{ display:block; margin:0; font-weight:400; font-size:13px; color:var(--ink); }
+    .reveal p:nth-child(2){ margin-bottom:16px; }
+    .deck-grid{ margin-top:22px; }
+  }
+  /* credit line is back (black, small), spacing between slides, credit and "more work" */
+  @media (min-width:761px){ .credit{ margin:90px 0 0; } .more-work{ margin-top:44px; } }
+  @media (max-width:760px){ .credit{ margin:26px 0 0; font-size:13px; } .more-work{ margin-top:48px; } }
 </style>
 </head>
 <body>
@@ -467,6 +492,7 @@
   <section class="reveal">
     <p><span>But first: how do you celebrate a brand’s birthday when you can’t show or name its products?</span><span>You tap into a subculture that already speaks the same language: <b class="hl">road cycling.</b></span></p>
     <p><span>Road cyclists have their own rituals, their own vocabulary, and an obsession with improving the ride.</span><span>Nobody settles for second-best. Your pleasure deserves the same.</span></p>
+    <p class="tap-hint"><span>Want to read more? Tap the slide.</span></p>
   </section>
 
   <div class="deck-grid-section">
@@ -479,6 +505,8 @@
     </div>
     <div class="deck-dots" id="deckDots"></div>
   </div>
+
+  <p class="credit">Project made with <b>Liesbeth</b></p>
 
   <a class="more-work" href="index.html">
     <span>more work</span>
@@ -680,6 +708,49 @@
         document.addEventListener('mouseleave',function(){ img.style.opacity='0'; });
       };
       img.src='easyride-cursor copy.png';
+    })();
+  </script>
+  <div class="lbm" id="lbm" role="dialog" aria-modal="true" aria-label="Slide, full screen">
+    <button class="lbm-close" type="button" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <img class="lbm-img" id="lbmImg" src="" alt="">
+    <div class="lbm-count" id="lbmCount"></div>
+  </div>
+  <script>
+    // phone only: tap a slide to open it full-screen (turned sideways), swipe for the other slides, X or tap to close
+    (function(){
+      var box=document.getElementById('lbm'), img=document.getElementById('lbmImg'), count=document.getElementById('lbmCount');
+      var items=[].slice.call(document.querySelectorAll('#deckGrid .deck-grid-item'));
+      if(!box||!img||!items.length) return;
+      var phone=window.matchMedia('(max-width:760px)');
+      var cur=0;
+      function setSlide(i, quick){
+        cur=(i+items.length)%items.length;
+        var im=items[cur].querySelector('img'); if(!im) return;
+        var src=im.currentSrc||im.src, alt=im.alt;
+        function apply(){ img.src=src; img.alt=alt; count.textContent=(cur+1)+' / '+items.length; }
+        if(quick){ apply(); return; }
+        img.classList.add('swap');
+        setTimeout(function(){ apply(); img.classList.remove('swap'); }, 140);
+      }
+      function open(i){ setSlide(i,true); box.classList.add('open'); document.body.classList.add('lbm-lock'); }
+      function close(){ box.classList.remove('open'); document.body.classList.remove('lbm-lock'); }
+      items.forEach(function(el,i){ el.addEventListener('click',function(){ if(phone.matches) open(i); }); });
+      box.addEventListener('click',close);
+      box.querySelector('.lbm-close').addEventListener('click',function(e){ e.stopPropagation(); close(); });
+      document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
+      // swipe: the slide is turned sideways in portrait, so its "left/right" is the screen's "up/down"
+      var sx=0, sy=0, tracking=false;
+      box.addEventListener('touchstart',function(e){ if(e.touches.length!==1){ tracking=false; return; } sx=e.touches[0].clientX; sy=e.touches[0].clientY; tracking=true; },{passive:true});
+      box.addEventListener('touchend',function(e){
+        if(!tracking||!box.classList.contains('open')) return;
+        tracking=false;
+        var t=e.changedTouches[0], dx=t.clientX-sx, dy=t.clientY-sy;
+        var portrait=window.innerHeight>window.innerWidth;
+        var main=portrait?dy:dx, cross=portrait?dx:dy;
+        if(Math.abs(main)<50||Math.abs(main)<Math.abs(cross)) return;
+        e.preventDefault();
+        setSlide(main<0?cur+1:cur-1);
+      });
     })();
   </script>
 </body>
