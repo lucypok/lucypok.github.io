@@ -400,14 +400,14 @@
     .deck-cap{ padding:0 24px; font-size:13px; }
     .deck-dots{ padding-top:14px; padding-bottom:6px; }
     .deck-grid-section{ padding-bottom:12px; }
-    .more-work{ margin-top:22px; }
+    .more-work{ margin-top:64px; }
   }
   @media (min-width:761px){ .more-work{ margin-top:90px; } }   /* laptop: keeps the space the credit line used to give */
   /* phone only: toys bigger and higher so they read clearly above the handlebars */
   @media (max-width:760px){
     .hero-toy-wrap{ z-index:1; }   /* toys sit behind the bike */
     .hero-toy-wrap.wand-a{ width:19%; left:12%; top:-2%; }
-    .hero-toy-wrap.dildo{ width:25%; right:1%; top:0%; }
+    .hero-toy-wrap.dildo{ width:19%; right:3%; top:2%; }
     .hero-toy-wrap.rabbit{ width:30%; left:-2%; top:57%; }
   }
   /* phone only: the question under the title, slightly bigger */
@@ -416,6 +416,14 @@
   }
   .m-br{ display:none; }
   @media (max-width:760px){ .m-br{ display:inline; } }   /* phone: "...EasyToys" on line one, "have in common?" on line two */
+  /* phone only: left-aligned intro text, light pink outline on slides, road fades on scroll */
+  @media (max-width:760px){
+    .reveal{ text-align:left; }
+    .reveal span{ width:calc(100% / 1.06); transform-origin:left center; }
+    .deck-grid-item img{ border:1.5px solid #f6bdd7; }
+    .deck-cap{ color:var(--pink); }
+    .top-band::before{ opacity:var(--road-o, 1); }
+  }
 </style>
 </head>
 <body>
@@ -634,10 +642,12 @@
       var ticking=false, last=-1;
       function update(){
         ticking=false;
-        if(!wide.matches){ if(last!==0){ last=0; band.style.opacity=''; } return; }
         var b=band.getBoundingClientRect().bottom/window.innerHeight;
         var o=Math.round(Math.min(Math.max((b-0.2)/0.7,0),1)*100)/100;
-        if(o!==last){ last=o; band.style.opacity=o; }
+        if(o===last) return;
+        last=o;
+        if(wide.matches){ band.style.opacity=o; band.style.removeProperty('--road-o'); }
+        else{ band.style.opacity=''; band.style.setProperty('--road-o', o); }
       }
       function onScroll(){ if(!ticking){ ticking=true; requestAnimationFrame(update); } }
       addEventListener('scroll',onScroll,{passive:true});
