@@ -372,12 +372,18 @@
     .hero-toy-wrap.rabbit{ width:13%; left:22%; }   /* rabbit a bit smaller */
     .hero-toy-wrap.dildo{ width:10%; right:31%; }   /* other toy a bit smaller */
     section.reveal{ padding-top:20px; }              /* intro text sits closer to the road */
-    .deck-grid{ margin-top:90px; }                   /* more space between the intro text and the slides */
+    .deck-grid{ margin-top:64px; }                   /* space between the intro text and the slides (grows as the text rises on scroll) */
+    .project-subtitle{ padding-top:7px; }            /* "What do road cycling and EasyToys..." a tiny bit lower */
+    .deck-cap{ display:block; }                      /* little notes under each slide are back */
+    /* slides only turn grey while one of them is actually hovered (not when the cursor is in the white space between them) */
+    .deck-grid:hover .deck-grid-item:not(:hover) img{ filter:none; }
+    .deck-grid:has(.deck-grid-item:hover) .deck-grid-item:not(:hover) img{ filter:saturate(0.45) brightness(0.92) opacity(0.7); }
+    .deck-grid{ max-width:clamp(760px, calc((100vh - 250px) * 1.7778 + 64px), 1440px); }   /* slightly smaller slides so the notes fit */
   }
   /* a bit more contrast / punch so the hero is less pale */
-  .top-band::before{ filter:contrast(1.12) saturate(1.12); }
-  .hero-bike{ filter:drop-shadow(0 20px 30px rgba(23,21,15,0.3)) contrast(1.12) saturate(1.12); }
-  .hero-toy{ filter:contrast(1.12) saturate(1.12); }
+  .top-band::before{ filter:contrast(1.08) saturate(1.04); }
+  .hero-bike{ filter:drop-shadow(0 20px 30px rgba(23,21,15,0.3)) contrast(1.08) saturate(1.04); }
+  .hero-toy{ filter:contrast(1.08) saturate(1.04); }
 </style>
 </head>
 <body>
@@ -419,8 +425,8 @@
   <div class="deck-grid-section">
     <p class="deck-hint"></p>
     <div class="deck-grid" id="deckGrid">
-      <div class="deck-grid-item"><img loading="lazy" decoding="async" src="slide-insight.png" alt="Insight slide: You don’t need it. Until you do. Real Reddit threads from cyclists and from people talking about vibrators."><p class="deck-cap">The insight: Nobody <em>needs</em> the upgrade but nobody wants to go back.</p></div>
-      <div class="deck-grid-item"><img loading="lazy" decoding="async" src="slide-audience.png" alt="Target audience slide: the perfect fit, 20s, 50s and women riders"><p class="deck-cap">Dutch audience, that already spends on feeling better: 20s, 50s, and women</p></div>
+      <div class="deck-grid-item"><img loading="lazy" decoding="async" src="slide-insight.png" alt="Insight slide: You don’t need it. Until you do. Real Reddit threads from cyclists and from people talking about vibrators."><p class="deck-cap">The insight</p></div>
+      <div class="deck-grid-item"><img loading="lazy" decoding="async" src="slide-audience.png" alt="Target audience slide: the perfect fit, 20s, 50s and women riders"><p class="deck-cap">Target audience</p></div>
       <div class="deck-grid-item"><img loading="lazy" decoding="async" src="slide-posters.png" alt="Execution 1: three EasyToys posters, Get into position, Take a break, The right tension, for a different kind of ride"><p class="deck-cap">Poster series placed along bike paths</p></div>
       <div class="deck-grid-item"><img loading="lazy" decoding="async" src="slide-lube.png" alt="Execution 2: EasyRide personal lubricant placed in Dutch bike shops, with reactions"><p class="deck-cap">A 20th-anniversary lube, placed in bike shops</p></div>
     </div>
@@ -597,6 +603,28 @@
         var bottom=band.getBoundingClientRect().bottom/window.innerHeight;
         var o=Math.min(Math.max((bottom-END)/(START-END),0),1);
         band.style.setProperty('--road-o', o.toFixed(3));
+      }
+      function onScroll(){ if(!ticking){ ticking=true; requestAnimationFrame(update); } }
+      addEventListener('scroll',onScroll,{passive:true});
+      addEventListener('resize',onScroll);
+      update();
+    })();
+  </script>
+  <script>
+    // laptop only: the intro text starts rising as the bike rises and the road fades, which opens up space above the slides
+    (function(){
+      var scene=document.querySelector('.hero-scene'), txt=document.querySelector('section.reveal');
+      if(!scene||!txt) return;
+      if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var desktop=window.matchMedia('(min-width:761px)');
+      var MAX_RISE=60, ticking=false;
+      function update(){
+        ticking=false;
+        if(!desktop.matches){ txt.style.transform=''; return; }
+        var rect=scene.getBoundingClientRect();
+        var p=(window.innerHeight*0.45-rect.top)/rect.height;
+        p=Math.min(Math.max(p,0),1);
+        txt.style.transform='translateY('+(-p*MAX_RISE).toFixed(1)+'px)';
       }
       function onScroll(){ if(!ticking){ ticking=true; requestAnimationFrame(update); } }
       addEventListener('scroll',onScroll,{passive:true});
