@@ -365,10 +365,17 @@
 <style>
   /* shorter bike path with the toys (laptop): less scrolling through the hero */
   @media (min-width:761px){
-    .hero-scene{ height:56vh; min-height:400px; max-height:620px; }
-    .hero-bike{ height:clamp(365px, 48vh, 480px); }
+    .hero-scene{ height:59vh; min-height:420px; max-height:650px; }
+    .hero-bike{ height:clamp(380px, 50vh, 500px); }
     .hero-visual-section{ padding-top:88px; }
+    .hero-bike-wrap{ bottom:-5%; }   /* bike sits a bit lower on the road */
+    .hero-toy-wrap.rabbit{ width:13%; left:22%; }   /* rabbit a bit smaller */
+    .hero-toy-wrap.dildo{ width:10%; right:31%; }   /* other toy a bit smaller */
   }
+  /* a bit more contrast / punch so the hero is less pale */
+  .top-band::before{ filter:contrast(1.12) saturate(1.12); }
+  .hero-bike{ filter:drop-shadow(0 20px 30px rgba(23,21,15,0.3)) contrast(1.12) saturate(1.12); }
+  .hero-toy{ filter:contrast(1.12) saturate(1.12); }
 </style>
 </head>
 <body>
