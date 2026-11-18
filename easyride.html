@@ -456,6 +456,36 @@
   @media (min-width:761px){ .credit{ margin:90px 0 0; } .more-work{ margin-top:44px; } }
   @media (max-width:760px){ .credit{ margin:26px 0 0; font-size:13px; } .more-work{ margin-top:48px; } }
 </style>
+<style>
+  /* v3: logo block, poster row + lube, strategy slides */
+  .brand-block{ max-width:900px; margin:0 auto; padding:72px 28px 0; text-align:center; }
+  .brand-logo{ display:block; width:clamp(210px, 22vw, 300px); height:auto; margin:0 auto 44px; }
+  .brand-copy{ margin:0 0 30px; color:var(--pink); font-weight:500; font-size:clamp(15px, 1.75vw, 22px); line-height:1.5; letter-spacing:-0.01em; }
+  .brand-copy span{ display:block; transform:scaleX(1.06); transform-origin:center; }
+  .exec-row{ max-width:1150px; margin:56px auto 0; padding:0 28px; display:flex; align-items:flex-start; gap:26px; }
+  .exec-item{ margin:0; min-width:0; display:flex; flex-direction:column; gap:14px; }
+  .exec-item img{ display:block; width:100%; height:auto; box-shadow:0 3px 9px -6px rgba(111,30,68,0.2); }
+  .exec-item figcaption{ text-align:center; font-size:14px; line-height:1.4; color:var(--pink-deep); }
+  .exec-plus{ flex:0 0 auto; align-self:center; margin-top:-30px; font-size:44px; font-weight:800; line-height:1; color:var(--pink); }
+  .deck-grid-section{ padding-top:96px; padding-bottom:0; }
+  .deck-grid-label{ margin-bottom:36px; }
+  @media (min-width:761px){
+    .deck-grid-label{ font-size:clamp(34px, 3.4vw, 48px); }
+    .deck-grid{ max-width:1180px; gap:38px; }
+    .deck-grid-section{ padding-left:28px; padding-right:28px; }
+  }
+  @media (max-width:760px){
+    .brand-block{ padding:36px 28px 0; }
+    .brand-logo{ margin-bottom:30px; }
+    .brand-copy{ font-size:14.5px; margin-bottom:22px; }
+    .exec-row{ flex-wrap:wrap; justify-content:center; gap:14px 10px; margin-top:34px; padding:0 18px; }
+    .exec-item:nth-of-type(-n+3){ flex:1 1 0 !important; }
+    .exec-plus{ flex:0 0 100%; text-align:center; margin:0; font-size:34px; }
+    .exec-item:last-of-type{ flex:0 0 62% !important; }
+    .exec-item figcaption{ font-size:11.5px; }
+    .deck-grid-section{ padding-top:56px; }
+  }
+</style>
 </head>
 <body>
 
@@ -489,19 +519,25 @@
   </div>
 
   <div class="post-hero" id="postHero">
-  <section class="reveal">
-    <p><span>But first: how do you celebrate a brand’s birthday when you can’t show or name its products?</span><span>You tap into a subculture that already speaks the same language: <b class="hl">road cycling.</b></span></p>
-    <p><span>Road cyclists have their own rituals, their own vocabulary, and an obsession with improving the ride.</span><span>Nobody settles for second-best. Your pleasure deserves the same.</span></p>
-    <p class="tap-hint"><span>Want to read more? Tap the slide.</span></p>
+  <section class="brand-block">
+    <img class="brand-logo" src="easyride-logo.png" alt="EasyRide, for a different kind of ride">
+    <p class="brand-copy"><span>Road cyclists don’t need the lightest wheels or sleekest saddle to ride, yet once they upgrade, they never go back. EasyToys has heard the exact same thing about pleasure for the last 20 years.</span></p>
+    <p class="brand-copy"><span>The result? A sweaty poster campaign along cycling lanes and a PR-driven 20th-anniversary lube launch, cheekily placed in bike shops across the Netherlands.</span></p>
+  </section>
+
+  <section class="exec-row" aria-label="The campaign">
+    <figure class="exec-item" style="flex:645 1 0"><img loading="lazy" decoding="async" src="poster-take-a-break.png" alt="Poster: Take a break, for a different kind of ride"><figcaption>Poster design</figcaption></figure>
+    <figure class="exec-item" style="flex:629 1 0"><img loading="lazy" decoding="async" src="poster-get-into-position.png" alt="Poster: Get into position, for a different kind of ride"><figcaption>Poster design</figcaption></figure>
+    <figure class="exec-item" style="flex:643 1 0"><img loading="lazy" decoding="async" src="poster-right-tension.png" alt="Poster: The right tension, for a different kind of ride"><figcaption>Poster design</figcaption></figure>
+    <div class="exec-plus" aria-hidden="true">+</div>
+    <figure class="exec-item" style="flex:667 1 0"><img loading="lazy" decoding="async" src="poster-lube.png" alt="EasyRide personal lubricant, the 20th-anniversary product"><figcaption>20th Anniversary product</figcaption></figure>
   </section>
 
   <div class="deck-grid-section">
-    <p class="deck-hint"></p>
+    <h2 class="deck-grid-label">The strategy</h2>
     <div class="deck-grid" id="deckGrid">
       <div class="deck-grid-item"><img loading="lazy" decoding="async" src="slide-insight.png" alt="Insight slide: You don’t need it. Until you do. Real Reddit threads from cyclists and from people talking about vibrators."><p class="deck-cap">The insight</p></div>
-      <div class="deck-grid-item"><img loading="lazy" decoding="async" src="slide-audience.png" alt="Target audience slide: the perfect fit, 20s, 50s and women riders"><p class="deck-cap">Target audience</p></div>
-      <div class="deck-grid-item"><img loading="lazy" decoding="async" src="slide-posters.png" alt="Execution 1: three EasyToys posters, Get into position, Take a break, The right tension, for a different kind of ride"><p class="deck-cap">Poster series placed along bike paths</p></div>
-      <div class="deck-grid-item"><img loading="lazy" decoding="async" src="slide-lube.png" alt="Execution 2: EasyRide personal lubricant placed in Dutch bike shops, with reactions"><p class="deck-cap">A 20th-anniversary lube, placed in bike shops</p></div>
+      <div class="deck-grid-item"><img loading="lazy" decoding="async" src="slide-audience.png" alt="Target audience slide: the perfect fit, 20s, 50s and women riders"><p class="deck-cap">The target audience</p></div>
     </div>
     <div class="deck-dots" id="deckDots"></div>
   </div>
