@@ -362,6 +362,14 @@
   .hero-visual-section{ padding-top:105px; }
   @media (max-width:760px){ .hero-visual-section{ padding-top:110px; } }
 </style>
+<style>
+  /* shorter bike path with the toys (laptop): less scrolling through the hero */
+  @media (min-width:761px){
+    .hero-scene{ height:56vh; min-height:400px; max-height:620px; }
+    .hero-bike{ height:clamp(365px, 48vh, 480px); }
+    .hero-visual-section{ padding-top:88px; }
+  }
+</style>
 </head>
 <body>
 
