@@ -344,20 +344,21 @@
   @media (max-width:760px){ .credit{ margin-bottom:18px; } }
   /* hero: the old intro text used to sit above the bike and made the road band taller; this space restores that, so the road fills the whole top and the bike sits lower again */
   @media (min-width:761px){
-    .reveal, .reveal span{ font-size:17.5px; }                   /* laptop: the paragraphs a bit smaller than the first line */
+    .reveal{ padding-top:60px; }                                 /* laptop: intro text a bit higher */
+    .reveal, .reveal span{ font-size:16px; }                   /* laptop: the paragraphs a bit smaller than the first line */
     .reveal span{ max-width:none; }                              /* wide enough that each sentence fits on one line */
     /* second paragraph: one block, same width as the "You tap into a subculture..." line */
-    .reveal p:nth-child(2){ max-width:648px; margin-left:auto; margin-right:auto; transform:scaleX(1.10); transform-origin:center; text-wrap:pretty; }
+    .reveal p:nth-child(2){ max-width:592px; margin-left:auto; margin-right:auto; transform:scaleX(1.10); transform-origin:center; text-wrap:pretty; }
     .reveal p:nth-child(2) span{ display:inline; transform:none; }
     .reveal p:nth-child(2) span + span::before{ content:" "; }
     .reveal .hl{ font-weight:700; }                              /* "road cycling" a bit less bold */
-    .reveal p:first-child span:first-child{ font-size:19px; font-weight:600; max-width:none; }   /* laptop: "But first..." is the biggest */
+    .reveal p:first-child span:first-child{ font-size:17.5px; font-weight:600; max-width:none; }   /* laptop: "But first..." is the biggest */
   }
   .deck-hint{ display:none; }   /* no slide hints on any device */
   @media (min-width:761px){ .deck-grid{ margin-top:56px; } }
   @media (max-width:760px){ .deck-grid{ margin-top:12px; } }
   /* laptop: size the slide grid so all four slides + captions fit on one screen */
-  @media (min-width:761px){ .deck-grid{ max-width:clamp(760px, calc((100vh - 270px) * 1.7778), 1440px); } }
+  @media (min-width:761px){ .deck-grid{ max-width:clamp(760px, calc((100vh - 200px) * 1.7778 + 64px), 1440px); column-gap:64px; } .deck-cap{ display:none; } }   /* laptop: no captions, slides a bit bigger */
   .hero-visual-section{ padding-top:105px; }
   @media (max-width:760px){ .hero-visual-section{ padding-top:110px; } }
 </style>
