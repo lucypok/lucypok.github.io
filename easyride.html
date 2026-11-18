@@ -462,7 +462,7 @@
   .brand-logo{ display:block; width:clamp(160px, 16vw, 230px); height:auto; margin:0 auto 38px; }
   .brand-copy{ margin:0 0 30px; color:var(--pink); font-weight:500; font-size:clamp(15px, 1.4vw, 18.5px); line-height:1.55; letter-spacing:-0.01em; }
   .brand-copy span{ display:block; transform:scaleX(1.06); transform-origin:center; }
-  .exec-row{ max-width:1380px; margin:100px auto 0; padding:0 20px; display:flex; align-items:flex-start; gap:22px; }
+  .exec-row{ max-width:1260px; margin:100px auto 0; padding:0 20px; display:flex; align-items:flex-start; gap:22px; }
   .exec-item{ margin:0; min-width:0; display:flex; flex-direction:column; gap:14px; }
   .exec-item img{ display:block; width:100%; height:auto; box-shadow:0 3px 9px -6px rgba(111,30,68,0.2); }
   .exec-item figcaption{ text-align:center; font-size:14px; line-height:1.4; color:var(--pink-deep); }
@@ -485,7 +485,8 @@
     .exec-item:last-of-type{ flex:0 0 72% !important; }
     .exec-item figcaption{ font-size:11.5px; }
     .deck-grid-section{ padding-top:84px; }
-    .deck-grid-label{ margin-bottom:10px; }
+    .deck-grid-label{ margin-bottom:2px; }
+    .deck-dots{ padding:0 0 12px; }
     .credit{ font-size:15px; margin-top:48px; margin-bottom:8px; }
     .more-work{ margin:0 auto 36px; padding-top:0; }
   }
@@ -543,11 +544,11 @@
 
   <div class="deck-grid-section">
     <h2 class="deck-grid-label">The strategy</h2>
+    <div class="deck-dots" id="deckDots"></div>
     <div class="deck-grid" id="deckGrid">
       <div class="deck-grid-item"><img loading="lazy" decoding="async" src="slide-insight.png" alt="Insight slide: You don’t need it. Until you do. Real Reddit threads from cyclists and from people talking about vibrators."><p class="deck-cap">The insight</p></div>
       <div class="deck-grid-item"><img loading="lazy" decoding="async" src="slide-audience.png" alt="Target audience slide: the perfect fit, 20s, 50s and women riders"><p class="deck-cap">The target audience</p></div>
     </div>
-    <div class="deck-dots" id="deckDots"></div>
   </div>
 
   <p class="credit">Project made with <b>Liesbeth</b></p>
