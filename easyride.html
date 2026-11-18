@@ -600,7 +600,7 @@
     })();
   </script>
   <script>
-    // the road background fades out as you scroll past it (laptop: slow, gentle fade)
+    // the road background fades out as you scroll past it (laptop: gentle fade, gone a bit sooner)
     (function(){
       var band=document.querySelector('.top-band');
       if(!band) return;
@@ -610,7 +610,7 @@
         ticking=false;
         if(!wide.matches){ if(last!==0){ last=0; band.style.opacity=''; } return; }
         var b=band.getBoundingClientRect().bottom/window.innerHeight;
-        var o=Math.round(Math.min(Math.max((b+0.25)/1.15,0),1)*100)/100;
+        var o=Math.round(Math.min(Math.max((b-0.35)/0.55,0),1)*100)/100;
         if(o!==last){ last=o; band.style.opacity=o; }
       }
       function onScroll(){ if(!ticking){ ticking=true; requestAnimationFrame(update); } }
