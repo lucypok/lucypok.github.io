@@ -427,6 +427,8 @@
   /* laptop only: the pink cursor is drawn by script so it can be smaller (change SCALE in the script to resize) */
   #cc{ position:fixed; left:0; top:0; z-index:99999; pointer-events:none; display:none; will-change:transform; }
   @media (min-width:761px) and (hover:hover) and (pointer:fine){ html.cc, html.cc *{ cursor:none !important; } html.cc #cc{ display:block; } }
+  /* laptop only: the question under the title, a tiny bit smaller */
+  @media (min-width:761px){ .project-subtitle{ font-size:clamp(16px, 1.75vw, 19.5px); } }
 </style>
 </head>
 <body>
