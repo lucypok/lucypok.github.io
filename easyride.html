@@ -424,6 +424,9 @@
     .deck-cap{ color:var(--pink); }
     .top-band::before{ opacity:var(--road-o, 1); }
   }
+  /* laptop only: the pink cursor is drawn by script so it can be smaller (change SCALE in the script to resize) */
+  #cc{ position:fixed; left:0; top:0; z-index:99999; pointer-events:none; display:none; will-change:transform; }
+  @media (min-width:761px) and (hover:hover) and (pointer:fine){ html.cc, html.cc *{ cursor:none !important; } html.cc #cc{ display:block; } }
 </style>
 </head>
 <body>
@@ -653,6 +656,27 @@
       addEventListener('scroll',onScroll,{passive:true});
       addEventListener('resize',onScroll);
       update();
+    })();
+  </script>
+  <script>
+    // laptop only: custom cursor at a smaller size
+    (function(){
+      var mq=window.matchMedia('(min-width:761px) and (hover:hover) and (pointer:fine)');
+      if(!mq.matches) return;
+      var SCALE=0.65, HX=8, HY=8;   // SCALE: 1 = original size; hotspot matches the old cursor (8,8)
+      var img=new Image();
+      img.id='cc'; img.alt=''; img.style.opacity='0';
+      img.onload=function(){
+        img.style.width=(img.naturalWidth*SCALE)+'px'; img.style.height='auto';
+        document.body.appendChild(img);
+        document.documentElement.classList.add('cc');
+        document.addEventListener('mousemove',function(e){
+          img.style.opacity='1';
+          img.style.transform='translate('+(e.clientX-HX*SCALE)+'px,'+(e.clientY-HY*SCALE)+'px)';
+        },{passive:true});
+        document.addEventListener('mouseleave',function(){ img.style.opacity='0'; });
+      };
+      img.src='easyride-cursor copy.png';
     })();
   </script>
 </body>
