@@ -249,7 +249,7 @@
     font-size:18px;
   }
   .intro-copy .emphasis-line{
-    display:inline-block;
+    display:block;   /* laptop: on its own line */
     margin-top:8px;
     font-weight:700;
     color:var(--white);   /* white, kept at the heavier weight */
@@ -276,7 +276,7 @@
     /* hero a bit bigger, centred (width 112% = 6% overhang each side) */
     .intro-visual{ width:119%; margin-left:-9.5%; margin-top:-18px; margin-bottom:0; }
     /* description is slimmer and sits centred under the hero video (the text is stretched 1.03 x 1.10 by the scaleX rules: 582px box = ~660px of text, hero is ~806px) */
-    .intro-copy{ margin-left:auto; margin-right:auto; max-width:650px; margin-top:62px; text-align:center; transform-origin:center; }
+    .intro-copy{ margin-left:auto; margin-right:auto; max-width:700px; margin-top:62px; text-align:center; transform-origin:center; }
     .intro-copy p{ transform-origin:center; }
     .intro-copy .bts-link{ transform-origin:center; }
     .intro{ padding-bottom:120px; }   /* pushes the white poster banner a bit lower (laptop) */
@@ -516,7 +516,7 @@
     .intro-visual{ width:calc(100% + 28px); max-width:none; margin-left:-14px; }   /* bigger hero video */
     .intro-copy{ max-width:80%; margin:26px auto 0; text-align:center; transform-origin:center; }   /* slimmer, a bit higher, centred like the laptop */
     .intro-copy p{ display:block; text-align:justify; hyphens:auto; -webkit-hyphens:auto; hyphenate-limit-chars:6 3 3; transform-origin:center; }   /* justified: both edges flush, last line stays left */
-    .intro-copy .emphasis-line{ display:block; text-align:justify; transform-origin:center; }   /* punchline justified like the rest */
+    .intro-copy .emphasis-line{ display:inline; margin-top:0; }   /* phone: punchline flows inside the paragraph */
     .intro-copy .bts-link{ font-size:15px; transform-origin:center; }   /* bigger "Watch video" */
     .carousel-track img{ width:220px; height:auto; }   /* bigger posters */
     .carousel-banner{ padding:25px 30px; }               /* banner keeps the same height */
@@ -539,6 +539,12 @@
     .intro-copy{ max-width:86%; transform:none; }
     .intro-copy p{ transform:scaleX(1.04); }
     .intro-copy .bts-link{ transform:scaleX(1.04); }
+  }
+</style>
+<style>
+  /* laptop: a bit more space between paragraphs, letters slightly less stretched */
+  @media (min-width:761px){
+    .intro-copy p{ margin-bottom:24px; transform:scaleX(1.05); }
   }
 </style>
 <style>
@@ -576,8 +582,7 @@
       </div>
       <div class="intro-copy">
         <p><a class="depop-link-white" href="https://news.depop.com/who-we-are/about/" target="_blank" rel="noopener">Depop</a> is an online marketplace for secondhand fashion. Yet in the Netherlands, it still misses the young, urban crowd that actually lives that style.</p>
-        <p>Nearly 1 in 5 Dutch 18- to 25-year-olds ride public transport almost daily (<a href="https://longreads.cbs.nl/klimaatverandering-en-energietransitie-2023/duurzame-mobiliteit/" target="_blank" rel="noopener" style="text-decoration:underline;text-underline-offset:3px;">CBS, 2022</a>). That’s a lot of waiting, mostly glued to their phones.</p>
-        <p><span class="emphasis-line" style="margin-top:0;">The only moment they look up is when the metro arrives.</span></p>
+        <p>Nearly 1 in 5 Dutch 18- to 25-year-olds ride public transport almost daily (<a href="https://longreads.cbs.nl/klimaatverandering-en-energietransitie-2023/duurzame-mobiliteit/" target="_blank" rel="noopener" style="text-decoration:underline;text-underline-offset:3px;">CBS, 2022</a>). That’s a lot of waiting, mostly glued to their phones. <span class="emphasis-line">The only moment they look up is when the metro arrives.</span></p>
         <p>With <strong class="bold-key">window stickers</strong>, every outfit becomes a Depop listing. Paired with <strong class="bold-key">reverse image search</strong> in the app, spotting a piece means buying it.</p>
         <div class="bts-wrap">
           <a class="bts-link" href="https://www.youtube.com/watch?v=GMriUzdwgc4" target="_blank" rel="noopener"> Watch video from the shoot :)</a>
