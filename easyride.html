@@ -519,6 +519,25 @@
     .pv-img{ max-width:calc(100vw - 24px); max-height:calc(100svh - 130px); }
   }
 </style>
+<style>
+  /* v4 (phone): strategy sub-label instead of captions, dots back, smaller lube, justified intro, more space under credit; Liesbeth pink on both */
+  .deck-sub{ display:none; }
+  .credit b{ color:var(--pink); }
+  @media (max-width:760px){
+    .deck-cap{ display:none; }
+    .deck-sub{ display:block; margin:0 0 16px; text-align:center; font-size:13px; line-height:1.3; }
+    .deck-sub .ds{ transition:color 0.25s ease, font-weight 0.25s ease; color:rgba(234,63,129,0.62); font-weight:500; }
+    .deck-sub[data-i="0"] .ds-a, .deck-sub[data-i="1"] .ds-b{ color:var(--pink); font-weight:700; }
+    .deck-sub:not([data-i]) .ds-a{ color:var(--pink); font-weight:700; }
+    .deck-dots{ gap:8px; padding-top:14px; }
+    .deck-dots span{ width:6px; height:6px; border-radius:50%; background:rgba(23,21,15,0.2); }
+    .deck-dots span.active{ background:var(--pink); }
+    .exec-item:last-of-type{ flex:0 0 58% !important; }
+    .brand-copy{ text-align:justify; text-justify:inter-word; -webkit-hyphens:auto; hyphens:auto; }
+    .brand-copy span{ width:calc(100% / 1.06); }
+    .credit{ margin-bottom:28px; }
+  }
+</style>
 </head>
 <body>
 
@@ -568,6 +587,7 @@
 
   <div class="deck-grid-section">
     <h2 class="deck-grid-label">The strategy</h2>
+    <p class="deck-sub"><span class="ds ds-a">Insight</span> <span class="ds ds-b">&amp; target audience</span></p>
     <div class="deck-grid" id="deckGrid">
       <div class="deck-grid-item"><img loading="lazy" decoding="async" src="slide-insight.png" alt="Insight slide: You don’t need it. Until you do. Real Reddit threads from cyclists and from people talking about vibrators."><p class="deck-cap">The insight</p></div>
       <div class="deck-grid-item"><img loading="lazy" decoding="async" src="slide-audience.png" alt="Target audience slide: the perfect fit, 20s, 50s and women riders"><p class="deck-cap">The target audience</p></div>
@@ -624,7 +644,13 @@
       if(!grid || !dotsWrap) return;
       var items = grid.querySelectorAll('.deck-grid-item');
       var total = items.length;
-      function setCount(i){ dotsWrap.textContent = (i + 1) + '/' + total; }
+      for(var k=0;k<total;k++){ var dot=document.createElement('span'); if(k===0) dot.classList.add('active'); dotsWrap.appendChild(dot); }
+      var dots = dotsWrap.querySelectorAll('span');
+      var sub = document.querySelector('.deck-sub');
+      function setCount(i){
+        dots.forEach(function(d, n){ d.classList.toggle('active', n === i); });
+        if(sub) sub.setAttribute('data-i', i);
+      }
       setCount(0);
       grid.addEventListener('scroll', function(){
         window.requestAnimationFrame(function(){
