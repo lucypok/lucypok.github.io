@@ -176,7 +176,7 @@
     margin:0 0 30px;
     display:inline-block;
     font-weight:700;
-    font-size:clamp(16px, 1.6vw, 20px);
+    font-size:clamp(17px, 1.7vw, 21px);
     line-height:1.4;
     letter-spacing:-0.01em;
     color:var(--white);
@@ -458,7 +458,7 @@
     .intro-copy p{ margin:0 0 12px; font-size:15px; }   /* phone body text size, same as the STAIN page */
     /* phone only: tagline centred again, slightly smaller */
     .lb{ display:none; }   /* phone: "Or at least what it aspires to be." flows on instead of starting a new line */
-    .project-sub{ display:block; max-width:92%; margin:12px auto 18px; font-size:16.5px; text-wrap:balance; }   /* stays inside the video width, lines break evenly */
+    .project-sub{ display:block; max-width:92%; margin:-8px auto 38px; font-size:18px; text-wrap:pretty; }   /* stays inside the video width, top line fills first so it is the longer one */
     .intro-copy .bts-wrap{ margin-top:14px; }
 
     .bottom-credit{ padding:0 32px; }
@@ -514,9 +514,10 @@
   /* phone adjustments */
   @media (max-width:760px){
     .intro-visual{ width:calc(100% + 28px); max-width:none; margin-left:-14px; }   /* bigger hero video */
-    .intro-copy{ max-width:80%; margin:26px 0 0 10px; text-align:left; transform-origin:left; }   /* slimmer, a bit higher, centred */
-    .intro-copy p{ transform-origin:left; }
-    .intro-copy .bts-link{ font-size:15px; transform-origin:left; }   /* bigger "Watch video" */
+    .intro-copy{ max-width:80%; margin:26px auto 0; text-align:center; transform-origin:center; }   /* slimmer, a bit higher, centred like the laptop */
+    .intro-copy p{ display:block; text-align:justify; hyphens:auto; -webkit-hyphens:auto; hyphenate-limit-chars:6 3 3; transform-origin:center; }   /* justified: both edges flush, last line stays left */
+    .intro-copy .emphasis-line{ display:block; text-align:justify; transform-origin:center; }   /* punchline justified like the rest */
+    .intro-copy .bts-link{ font-size:15px; transform-origin:center; }   /* bigger "Watch video" */
     .carousel-track img{ width:220px; height:auto; }   /* bigger posters */
     .carousel-banner{ padding:25px 30px; }               /* banner keeps the same height */
     .bottom-credit img{ width:140px; }                   /* smaller Liesbeth photo */
@@ -554,7 +555,7 @@
       <br>
       <h1 class="project-title">DEPOP — Campaign</h1>
       <br>
-      <p class="project-sub">The metro is fast, urban, and sustainable, just like <a class="depop-link" href="https://www.depop.com/" target="_blank" rel="noopener">Depop</a>.<br class="lb"> Or at least what it aspires to be.</p>
+      <p class="project-sub">The metro is everything <a class="depop-link" href="https://www.depop.com/" target="_blank" rel="noopener">Depop</a> wishes it could be.</p>
     </header>
 
     <div class="intro">
@@ -564,11 +565,10 @@
         </div>
       </div>
       <div class="intro-copy">
-        <p><a class="depop-link-white" href="https://news.depop.com/who-we-are/about/" target="_blank" rel="noopener">Depop</a> is a peer-to-peer marketplace to buy, sell and discover secondhand fashion. </p>
-        <p>What they're missing is a direct line to the young, urban community that already fits that identity.</p>
-        <p>Nearly 1 in 5 Dutch 18- to 25-year-olds ride public transport (almost) daily (<a href="https://longreads.cbs.nl/klimaatverandering-en-energietransitie-2023/duurzame-mobiliteit/" target="_blank" rel="noopener" style="text-decoration:underline;text-underline-offset:3px;">CBS, 2022</a>). That's a lot of waiting.</p>
-        <p><span class="emphasis-line" style="margin-top:0;">But while waiting, most people are glued to their phones. The only moment they do look up is when the metro arrives.</span></p>
-        <p>And that's the moment we'd grab their attention and link it directly to Depop.<br>By putting <strong class="bold-key">stickers</strong> on the metro windows, we'd frame every outfit as a potential Depop buy or sell. Next to that we'd add a <strong class="bold-key">reverse image search</strong> feature in the Depop app. The easier it is to find, the easier it is to buy.</p>
+        <p><a class="depop-link-white" href="https://news.depop.com/who-we-are/about/" target="_blank" rel="noopener">Depop</a> is an online marketplace for secondhand fashion. Yet in the Netherlands, it still misses the young, urban crowd that actually lives that style.</p>
+        <p>Nearly 1 in 5 Dutch 18- to 25-year-olds ride public transport almost daily (<a href="https://longreads.cbs.nl/klimaatverandering-en-energietransitie-2023/duurzame-mobiliteit/" target="_blank" rel="noopener" style="text-decoration:underline;text-underline-offset:3px;">CBS, 2022</a>). That’s a lot of waiting, mostly glued to their phones.</p>
+        <p><span class="emphasis-line" style="margin-top:0;">The only moment they look up is when the metro arrives.</span></p>
+        <p>So we’d put <strong class="bold-key">stickers on the windows</strong>, and every outfit inside becomes a Depop listing. Paired with <strong class="bold-key">reverse image search</strong> in the app, spotting a piece means you can actually buy it. The easier it is to find, the easier it is to buy.</p>
         <div class="bts-wrap">
           <a class="bts-link" href="https://www.youtube.com/watch?v=GMriUzdwgc4" target="_blank" rel="noopener"> Watch video from the shoot :)</a>
           <div class="bts-preview" aria-hidden="true"></div>
