@@ -194,6 +194,10 @@
   .footer-social a{ display:flex; color:var(--ink); transition:opacity 0.2s ease; }
   .footer-social a:hover{ opacity:0.6; }
   .footer-social svg{ width:22px; height:22px; display:block; }
+  .footer-social a.footer-cv{
+    font-weight:500; font-size:clamp(14px, 1.2vw, 17px); letter-spacing:-0.03em; line-height:1;
+    text-decoration:underline; text-decoration-thickness:1.5px; text-underline-offset:4px;
+  }
   @media (max-width:760px){
     .footer{ padding:48px 24px 44px; }
     .footer-inner{ padding-top:26px; }
@@ -711,6 +715,7 @@
       <a href="https://www.youtube.com/@LUCYPOK-17" target="_blank" rel="noopener" aria-label="YouTube">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4.5"/><path d="M10 9.4v5.2l4.6-2.6z" fill="currentColor"/></svg>
       </a>
+      <a class="footer-cv" href="cv.html" target="_blank" rel="noopener">CV</a>
     </div>
    </div>
   </footer>
